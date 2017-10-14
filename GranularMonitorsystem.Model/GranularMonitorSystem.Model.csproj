@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8FF396C2-247F-46F7-93A4-AC7B553A5D65}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GranularMonitorSystem.Model</RootNamespace>
+    <AssemblyName>GranularMonitorsystem.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\DatabaseModel.cs" />
+    <Compile Include="Models\TasksModel.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Server\ServerCPUModel.cs" />
+    <Compile Include="Models\Server\ServerMemoryModel.cs" />
+    <Compile Include="Models\Server\ServerDiskspaceModel.cs" />
+    <Compile Include="Models\Server\ServerCPUContainer.cs" />
+    <Compile Include="Models\Server\ServerDiskspaceContainer.cs" />
+    <Compile Include="Models\Server\ServerMemoryContainer.cs" />
+    <Compile Include="Models\Website\WebsiteContainer.cs" />
+    <Compile Include="Models\Website\WebsiteModel.cs" />
+    <Compile Include="Models\Alert\AlertModel.cs" />
+    <Compile Include="Models\Alert\AlertContainer.cs" />
+    <Compile Include="Models\Server\ServerContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Models\Server\" />
+    <Folder Include="Models\Website\" />
+    <Folder Include="Models\Alert\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>
