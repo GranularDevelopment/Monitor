@@ -1,7 +1,6 @@
 // Helpers/Settings.cs
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
-
 namespace GranularMonitorSystem
 {
 	/// <summary>
@@ -90,6 +89,22 @@ namespace GranularMonitorSystem
 		//	get => AppSettings.GetValueOrDefault<bool>(IdAllowGpsLocation, AllowGpsLocationDefault);
 		//	set => AppSettings.AddOrUpdateValue<bool>(IdAllowGpsLocation, value);
 		//}
-	}
 
+		private const string SettingsKey = "settings_key";
+		private static readonly string SettingsDefault = string.Empty;
+
+
+
+		public static string GeneralSettings
+		{
+			get
+			{
+				return AppSettings.GetValueOrDefault(SettingsKey, SettingsDefault);
+			}
+			set
+			{
+				AppSettings.AddOrUpdateValue(SettingsKey, value);
+			}
+		}
+    }
 }
