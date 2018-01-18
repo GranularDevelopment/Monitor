@@ -46,7 +46,7 @@ namespace GranularMonitorSystem
             if(!Validate())
                 return;
             
-            User user = await _userService.LoginAsync<User>(_userName.Value, _password.Value);
+            User user = await _userService.LoginAsync<User>(_userName.Value.Replace(" ",String.Empty), _password.Value.Replace(" ", String.Empty));
             if(!string.IsNullOrEmpty(user.Token))
             {
                 Constants.TOKEN = user.Token;
