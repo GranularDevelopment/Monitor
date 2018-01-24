@@ -7,7 +7,6 @@ using OxyPlot;
 using OxyPlot.Xamarin.Forms;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using GranularMonitorSystem.Model.Models.Server;
 
 namespace GranularMonitorSystem
 {
@@ -20,9 +19,9 @@ namespace GranularMonitorSystem
             _serverService = serverService;
         }
 
-        public override async Task InitializeAsync(object navigationData)
+        public override Task InitializeAsync(object navigationData)
         {
-
+            return Task.FromResult(false);
         }
 
         public async Task<PlotModel> CreatePlotModel() {

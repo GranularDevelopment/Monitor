@@ -26,7 +26,7 @@ namespace GranularMonitorSystem
 			base.OnDisappearing();
 		}
 
-		async void OnSelection(object sender, SelectedItemChangedEventArgs e)
+		void OnSelection(object sender, SelectedItemChangedEventArgs e)
 		{
 			if (e.SelectedItem == null)
 			{

@@ -12,7 +12,7 @@ namespace GranularMonitorSystem
 			InitializeComponent();
 		}
 
-		protected async override void OnAppearing()
+		protected override void OnAppearing()
 		{
             var content = this.Content;
             this.Content = null;

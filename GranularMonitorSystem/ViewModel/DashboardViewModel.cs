@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using GranularMonitorSystem.Services.API.Dashboard;
 using System.Windows.Input;
 using Xamarin.Forms;
-using GranularMonitorSystem.Model.Models.Alert;
 
 namespace GranularMonitorSystem
 {
@@ -24,7 +23,7 @@ namespace GranularMonitorSystem
             {
                 IsBusy = true;
                 AlertContainer alertContainer  = await  _dashboardService.GetAlertsAsync(Common.Constants.TOKEN);
-                await OnUpdate(alertContainer);
+                OnUpdate(alertContainer);
                 IsBusy = false;
             }
             catch (Exception e)
@@ -45,7 +44,7 @@ namespace GranularMonitorSystem
             }
         }
 
-        public async Task OnUpdate(AlertContainer alertContainer)
+        public void OnUpdate(AlertContainer alertContainer)
         {
             foreach (AlertModel model in alertContainer.alert)
             {

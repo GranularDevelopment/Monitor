@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GranularMonitorSystem.Model.Models.Server;
+using GranularMonitorSystem;
 using GranularMonitorSystem.Common;
 using GranularMonitorSystem.Services.API.Requests;
 

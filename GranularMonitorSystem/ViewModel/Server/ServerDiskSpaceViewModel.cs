@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GranularMonitorSystem.Common;
-using GranularMonitorSystem.Model.Models.Server;
 using GranularMonitorSystem.Services.API.Server;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -18,8 +17,9 @@ namespace GranularMonitorSystem
             _serverService = serverService;
         }
 
-        public override async Task InitializeAsync(object navigationData)
+        public override  Task InitializeAsync(object navigationData)
         {
+            return Task.FromResult(false);
         }
 
         public async Task<PlotModel> CreatePlotModel() {

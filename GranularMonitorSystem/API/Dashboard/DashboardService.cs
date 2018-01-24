@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GranularMonitorSystem.Common;
-using GranularMonitorSystem.Model;
-using GranularMonitorSystem.Model.Models.Alert;
 using GranularMonitorSystem.Services.API.Requests;
 
 namespace GranularMonitorSystem.Services.API.Dashboard

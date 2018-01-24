@@ -10,7 +10,6 @@ namespace GranularMonitorSystem
 {
 	public partial class ServerIOView : ContentPage
 	{
-		LineSeries ioSeries;
 
 		public ServerIOView()
 		{

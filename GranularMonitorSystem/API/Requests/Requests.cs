@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GranularMonitorSystem.Services.RequestProvider;
-using GranularMonitorSystem.Service.Exceptions;
 using System.Text;
 
 namespace GranularMonitorSystem.Services.API.Requests

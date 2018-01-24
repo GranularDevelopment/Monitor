@@ -128,6 +128,31 @@
     <Compile Include="ViewModel\Server\ServerIOViewModel.cs" />
     <Compile Include="ViewModel\Website\WebsiteViewModel.cs" />
     <Compile Include="ViewModel\Website\EditWebsiteViewModel.cs" />
+    <Compile Include="Models\DatabaseModel.cs" />
+    <Compile Include="Models\TasksModel.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Alert\AlertContainer.cs" />
+    <Compile Include="Models\Alert\AlertModel.cs" />
+    <Compile Include="Models\Server\ServerCPUContainer.cs" />
+    <Compile Include="Models\Server\ServerCPUModel.cs" />
+    <Compile Include="Models\Server\ServerContainer.cs" />
+    <Compile Include="Models\Server\ServerDiskspaceContainer.cs" />
+    <Compile Include="Models\Server\ServerDiskspaceModel.cs" />
+    <Compile Include="Models\Server\ServerMemoryContainer.cs" />
+    <Compile Include="Models\Server\ServerMemoryModel.cs" />
+    <Compile Include="Models\Website\WebsiteContainer.cs" />
+    <Compile Include="Models\Website\WebsiteModel.cs" />
+    <Compile Include="API\Dashboard\DashboardService.cs" />
+    <Compile Include="API\Dashboard\IDashboardService.cs" />
+    <Compile Include="API\HttpRequestExceptionEx.cs" />
+    <Compile Include="API\Identity\IdentityService.cs" />
+    <Compile Include="API\Identity\IIdentityService.cs" />
+    <Compile Include="API\Requests\IRequests.cs" />
+    <Compile Include="API\Requests\Requests.cs" />
+    <Compile Include="API\Server\IServerService.cs" />
+    <Compile Include="API\Server\ServerService.cs" />
+    <Compile Include="API\Website\IWebsiteService.cs" />
+    <Compile Include="API\Website\WebsiteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OxyPlot">
@@ -170,16 +195,16 @@
       <HintPath>..\packages\Xamarin.Forms.2.5.0.122203\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator">
-      <HintPath>..\packages\Unity.5.5.5\lib\netstandard1.0\CommonServiceLocator.dll</HintPath>
+      <HintPath>..\packages\Unity.5.5.6\lib\netstandard1.0\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Abstractions">
-      <HintPath>..\packages\Unity.5.5.5\lib\netstandard1.0\Unity.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Unity.5.5.6\lib\netstandard1.0\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Container">
-      <HintPath>..\packages\Unity.5.5.5\lib\netstandard1.0\Unity.Container.dll</HintPath>
+      <HintPath>..\packages\Unity.5.5.6\lib\netstandard1.0\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ServiceLocation">
-      <HintPath>..\packages\Unity.5.5.5\lib\netstandard1.0\Unity.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\Unity.5.5.6\lib\netstandard1.0\Unity.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Acr.UserDialogs">
       <HintPath>..\packages\Acr.UserDialogs.6.5.1\lib\netstandard1.1\Acr.UserDialogs.dll</HintPath>
@@ -204,19 +229,12 @@
     <Folder Include="ViewModel\Base\" />
     <Folder Include="ViewModel\Server\" />
     <Folder Include="ViewModel\Website\" />
+    <Folder Include="API\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GranularMonitorSystem.Common\GranularMonitorSystem.Common.csproj">
       <Project>{01718F2B-5803-4976-833B-EB2B9C6994E2}</Project>
       <Name>GranularMonitorSystem.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GranularMonitorSystem.Services\GranularMonitorSystem.Services.csproj">
-      <Project>{819988B0-B672-4F08-86DD-BE8A04056FC0}</Project>
-      <Name>GranularMonitorSystem.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GranularMonitorSystem.Model\GranularMonitorSystem.Model.csproj">
-      <Project>{8FF396C2-247F-46F7-93A4-AC7B553A5D65}</Project>
-      <Name>GranularMonitorSystem.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

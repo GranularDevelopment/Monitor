@@ -22,6 +22,7 @@ namespace GranularMonitorSystem
             _userService = userService;
             _userName = new ValidatableObject<string>();
 			_password = new ValidatableObject<string>();
+
 		}
 
         public override Task InitializeAsync(object navigationData)

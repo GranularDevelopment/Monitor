@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GranularMonitorSystem.Model.Models.Server;
 
 namespace GranularMonitorSystem.Services.API.Server
 {
