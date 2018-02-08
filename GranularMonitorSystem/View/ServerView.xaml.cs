@@ -22,8 +22,6 @@ namespace GranularMonitorSystem
             var content = this.Content;
             this.Content = null;
             this.Content = content;
-
-            var vm = BindingContext as ServerViewModel; 
             base.OnAppearing();
 
 		}

@@ -18,13 +18,6 @@ namespace GranularMonitorSystem
 
         protected override void OnAppearing()
         {
-            var content = this.Content;
-            this.Content = null;
-            this.Content = content;
-
-            var  vm = BindingContext as ServerIOViewModel; 
-
-            
             base.OnAppearing();
         }
 	}

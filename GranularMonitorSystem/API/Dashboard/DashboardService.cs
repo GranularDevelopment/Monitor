@@ -14,11 +14,11 @@ namespace GranularMonitorSystem.Services.API.Dashboard
             _request = request;
         }
 
-        public async Task<AlertContainer> GetAlertsAsync(string token)
+        public async Task<AlertContainer> GetAlertsAsync()
         {
             UriBuilder builder = new UriBuilder(Constants.URL_ALERT);
             string uri = builder.ToString();
-            AlertContainer alertContainer = await _request.GetAsync<AlertContainer>(uri, token);
+            AlertContainer alertContainer = await _request.GetAsync<AlertContainer>(uri);
 
             return alertContainer;
         }

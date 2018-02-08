@@ -15,20 +15,20 @@ namespace GranularMonitorSystem.Services.API.Website
             _request = request; 
         }
 
-        public async Task<WebsiteContainer> GetWebsiteAsync(string token)
+        public async Task<WebsiteContainer> GetWebsiteAsync()
         {
             UriBuilder builder = new UriBuilder(Constants.URL_WEBSITE);
             string uri = builder.ToString();
-            WebsiteContainer websiteContainer = await _request.GetAsync<WebsiteContainer>(uri, token : token);
+            WebsiteContainer websiteContainer = await _request.GetAsync<WebsiteContainer>(uri);
 
             return websiteContainer; 
         }
 
-        public async Task<WebsiteContainer> PostWebsiteAlertAsync(WebsiteContainer container, string token)
+        public async Task<WebsiteContainer> PostWebsiteAlertAsync(WebsiteContainer container)
         {
             UriBuilder builder = new UriBuilder(Constants.URL_WEBSITE_EDIT);
             string uri = builder.ToString();
-            WebsiteContainer websiteContainer = await _request.PostAsync(uri, container, token);
+            WebsiteContainer websiteContainer = await _request.PostAsync(uri, container);
 
             return websiteContainer;
         }

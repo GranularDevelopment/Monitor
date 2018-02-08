@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using GranularMonitorSystem.Model;
 using GranularMonitorSystem.Common;
-using GranularMonitorSystem.Services.RequestProvider;
 using GranularMonitorSystem.Services.API.Requests;
 
 namespace GranularMonitorSystem.Services.API.Identity

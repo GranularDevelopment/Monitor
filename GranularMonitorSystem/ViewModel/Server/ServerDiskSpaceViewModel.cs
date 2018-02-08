@@ -17,14 +17,14 @@ namespace GranularMonitorSystem
             _serverService = serverService;
         }
 
-        public override  Task InitializeAsync(object navigationData)
+        public override  async Task InitializeAsync(object navigationData)
         {
-            return Task.FromResult(false);
+            await CreatePlotModel();
         }
 
-        public async Task<PlotModel> CreatePlotModel() {
+        public async Task CreatePlotModel() {
 
-            ServerDiskspaceContainer serverDiskspaceContainer = await _serverService.GetServerDiskspaceAsync(Constants.TOKEN);
+            ServerDiskspaceContainer serverDiskspaceContainer = await _serverService.GetServerDiskspaceAsync();
 
             var series1 = new LineSeries {
                 MarkerType = MarkerType.Circle,
@@ -44,7 +44,18 @@ namespace GranularMonitorSystem
 
             plotModel.Series.Add (series1);
 
-            return plotModel;
+            PlotModel=plotModel;
+        }
+
+        private PlotModel _plotModel;
+        public PlotModel PlotModel
+        {
+            get {return _plotModel;}
+            set 
+            {
+                _plotModel=value; 
+                RaisePropertyChanged(() => PlotModel);
+            }
         }
     }
 }

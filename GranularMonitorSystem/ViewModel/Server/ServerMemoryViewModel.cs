@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GranularMonitorSystem.Common;
 using GranularMonitorSystem.Services.API.Server;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using Xamarin.Forms;
 
 namespace GranularMonitorSystem
 {
@@ -17,14 +19,21 @@ namespace GranularMonitorSystem
             _serverService = serverService;
         }
 
-        public override  Task InitializeAsync(object navigationData)
+        public ICommand TodayCommand => new Command (async() => await TodayCommandAsyn() );
+
+        private async Task TodayCommandAsyn()
         {
-            return Task.FromResult(false);
+            await DialogService.ShowAlertAsync("M","T", "ok");
         }
 
-        public async Task<PlotModel> CreatePlotModel() 
+        public override  async Task InitializeAsync(object navigationData)
         {
-            ServerMemoryContainer serverMemoryContainer = await _serverService.GetServerMemoryAsync(Constants.TOKEN);
+            await CreatePlotModel();
+        }
+
+        public async Task CreatePlotModel() 
+        {
+            ServerMemoryContainer serverMemoryContainer = await _serverService.GetServerMemoryAsync();
 
             var series1 = new LineSeries {
                 MarkerType = MarkerType.Circle,
@@ -44,7 +53,18 @@ namespace GranularMonitorSystem
 
             plotModel.Series.Add (series1);
 
-            return plotModel;
+            PlotModel = plotModel;
+        }
+
+        private PlotModel _plotModel;
+        public PlotModel PlotModel
+        {
+            get {return _plotModel;}
+            set 
+            {
+                _plotModel=value; 
+                RaisePropertyChanged(() => PlotModel);
+            }
         }
     }
 }

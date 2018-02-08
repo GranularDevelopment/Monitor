@@ -31,19 +31,8 @@ namespace GranularMonitorSystem
 
         #endif
 
-        protected async override void OnAppearing()
+        protected  override void OnAppearing()
         {
-            var  vm = BindingContext as ServerCpuViewModel; 
-
-
-            var content = this.Content;
-            this.Content = null;
-
-            this.Content = new PlotView
-            {
-                Model = await vm.CreatePlotModel()
-            };
-
             base.OnAppearing();
         }
 

@@ -14,9 +14,9 @@ namespace GranularMonitorSystem
         {
             try
             {
-                //ibase.InitializeAsync(navigationData);
+                await Task.FromResult(false);
             }
-            catch (Exception e)
+            catch (Exception e) 
             {
                 await DialogService.ShowAlertAsync("Exception", e.ToString(), "OK");
 

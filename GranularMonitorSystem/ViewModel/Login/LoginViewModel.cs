@@ -7,6 +7,8 @@ using GranularMonitorSystem.Common;
 using Xamarin.Forms;
 using GranularMonitorSystem.Services.API.Identity;
 using GranularMonitorSystem.Model;
+using GranularMonitorSystem.Exceptions;
+using GranularMonitorSystem.Services.RequestProvider;
 
 namespace GranularMonitorSystem
 {
@@ -36,27 +38,41 @@ namespace GranularMonitorSystem
         {
             IsBusy = true;
 
-            await Task.Delay(500);
-            await LoginAndGetToken();
+            await LoginAndGetTokenAsync();
 
             IsBusy = false;
         }
-
-        public async Task LoginAndGetToken()
+        
+        public async Task LoginAndGetTokenAsync()
         {
             if(!Validate())
                 return;
-            
-            User user = await _userService.LoginAsync<User>(_userName.Value.Replace(" ",String.Empty), _password.Value.Replace(" ", String.Empty));
-            if(!string.IsNullOrEmpty(user.Token))
+                
+            try
             {
-                Constants.TOKEN = user.Token;
-                await NavigationService.NavigateToAsync<DashboardViewModel>();
-                await NavigationService.RemoveLastFromBackStackAsync();
+                User user = await _userService.LoginAsync<User>(_userName.Value.Replace(" ",String.Empty), _password.Value.Replace(" ", String.Empty));
+                if(!string.IsNullOrEmpty(user.Token))
+                {
+                    Settings.AuthAccessToken = user.Token;
+                    await NavigationService.NavigateToAsync<DashboardViewModel>();
+                    await NavigationService.RemoveLastFromBackStackAsync();
+                }
+            }
+            catch (ServiceAuthenticationException e)
+            {
+                await DialogService.ShowAlertAsync(e.Content, "Authentication Error", "OK");
+            }
+            catch (HttpRequestExceptionEx  e)
+            {
+                await DialogService.ShowAlertAsync(e.HttpCode.ToString(), "HTTP Error", "OK");
+            }
+            catch (Exception e)
+            {
+                await DialogService.ShowAlertAsync(e.ToString(), "Error", "OK");
             }
         }
-
-		public ValidatableObject<string> Username 
+        
+        public ValidatableObject<string> Username 
 		{ 
 			set 
 			{
@@ -133,6 +149,5 @@ namespace GranularMonitorSystem
 			_userName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A username is required." });
 			_password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
 		}
-
 	}
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="GranularMonitorSystem.ServerCpuView"
+    x:Class="GranularMonitorSystem.ServerCpuView"
+    xmlns:oxyplot="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
     xmlns:viewModelBase="clr-namespace:GranularMonitorSystem;assembly=GranularMonitorSystem"
     xmlns:behaviors="clr-namespace:GranularMonitorSystem.Behaviors;assembly=GranularMonitorSystem"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true" >
-    <StackLayout Orientation="Vertical">
-
-    </StackLayout>
+    <AbsoluteLayout x:Name="Plot" >
+    <oxyplot:PlotView
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            Model="{Binding PlotModel}" /> 
+    </AbsoluteLayout>
 </ContentPage>

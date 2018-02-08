@@ -47,19 +47,19 @@
     <EmbeddedResource Include="View\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubView\ServerCpuView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SubView\ServerMemoryView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SubView\ServerDiskSpaceView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SubView\ServerIOView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\CustomNavigationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SubView\ServerCpuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SubView\ServerDiskSpaceView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SubView\ServerIOView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SubView\ServerMemoryView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -86,18 +86,6 @@
     <Compile Include="View\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SubView\ServerCpuView.xaml.cs">
-      <DependentUpon>ServerCpuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SubView\ServerMemoryView.xaml.cs">
-      <DependentUpon>ServerMemoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SubView\ServerDiskSpaceView.xaml.cs">
-      <DependentUpon>ServerDiskSpaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SubView\ServerIOView.xaml.cs">
-      <DependentUpon>ServerIOView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="View\CustomNavigationView.xaml.cs">
       <DependentUpon>CustomNavigationView.xaml</DependentUpon>
@@ -111,11 +99,7 @@
     <Compile Include="Validation\IValidationRule.cs" />
     <Compile Include="Validation\IValidity.cs" />
     <Compile Include="Validation\ValidatableObject.cs" />
-    <Compile Include="ViewModel\DashboardViewModel.cs" />
-    <Compile Include="ViewModel\IViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Behaviors\BindableBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="ViewModel\Base\ViewModelLocator.cs" />
@@ -144,7 +128,6 @@
     <Compile Include="Models\Website\WebsiteModel.cs" />
     <Compile Include="API\Dashboard\DashboardService.cs" />
     <Compile Include="API\Dashboard\IDashboardService.cs" />
-    <Compile Include="API\HttpRequestExceptionEx.cs" />
     <Compile Include="API\Identity\IdentityService.cs" />
     <Compile Include="API\Identity\IIdentityService.cs" />
     <Compile Include="API\Requests\IRequests.cs" />
@@ -153,6 +136,23 @@
     <Compile Include="API\Server\ServerService.cs" />
     <Compile Include="API\Website\IWebsiteService.cs" />
     <Compile Include="API\Website\WebsiteService.cs" />
+    <Compile Include="ViewModel\Dashboard\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModel\Base\ViewModelBase.cs" />
+    <Compile Include="API\Requests\HttpRequestExceptionEx.cs" />
+    <Compile Include="Exceptions\ServiceAuthenticationException.cs" />
+    <Compile Include="View\SubView\ServerCpuView.xaml.cs">
+      <DependentUpon>..\..\SubView\ServerCpuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubView\ServerDiskSpaceView.xaml.cs">
+      <DependentUpon>..\..\SubView\ServerDiskSpaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubView\ServerIOView.xaml.cs">
+      <DependentUpon>..\..\SubView\ServerIOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubView\ServerMemoryView.xaml.cs">
+      <DependentUpon>..\..\SubView\ServerMemoryView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OxyPlot">
@@ -217,7 +217,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SubView\" />
     <Folder Include="Dialog\" />
     <Folder Include="Helpers\" />
     <Folder Include="Navigation\" />
@@ -230,6 +229,10 @@
     <Folder Include="ViewModel\Server\" />
     <Folder Include="ViewModel\Website\" />
     <Folder Include="API\" />
+    <Folder Include="ViewModel\Dashboard\" />
+    <Folder Include="ViewModel\Login\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="View\SubView\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GranularMonitorSystem.Common\GranularMonitorSystem.Common.csproj">

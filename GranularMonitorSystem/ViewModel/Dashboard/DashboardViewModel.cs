@@ -22,7 +22,7 @@ namespace GranularMonitorSystem
             try
             {
                 IsBusy = true;
-                AlertContainer alertContainer  = await  _dashboardService.GetAlertsAsync(Common.Constants.TOKEN);
+                AlertContainer alertContainer  = await  _dashboardService.GetAlertsAsync();
                 OnUpdate(alertContainer);
                 IsBusy = false;
             }

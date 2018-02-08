@@ -30,8 +30,7 @@ namespace GranularMonitorSystem
 
         private async Task getStatus()
         {
-            var token = Constants.TOKEN;
-            ServerContainer serverContainer = await _serverService.GetServerAsync(token);
+            ServerContainer serverContainer = await _serverService.GetServerAsync();
 
             StatusCode = serverContainer.StatusCode;
             Description = serverContainer.Description;
@@ -75,8 +74,7 @@ namespace GranularMonitorSystem
             {
                 On = _on
             };
-            var token = Constants.TOKEN;
-            ServerContainer serverContainer = await _serverService.PostServerAlertAsync(container, token);
+            ServerContainer serverContainer = await _serverService.PostServerAlertAsync(container);
             await DialogService.ShowAlertAsync("Successful","Save","OK");
         }
 

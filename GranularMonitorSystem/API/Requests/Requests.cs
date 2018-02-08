@@ -6,8 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using GranularMonitorSystem.Services.RequestProvider;
 using System.Text;
+using GranularMonitorSystem.Exceptions;
+using GranularMonitorSystem.Services.RequestProvider;
 
 namespace GranularMonitorSystem.Services.API.Requests
 {
@@ -26,9 +27,9 @@ namespace GranularMonitorSystem.Services.API.Requests
                 _serializerSettings.Converters.Add(new StringEnumConverter());
             }
 
-            public async Task<TResult> GetAsync<TResult>(string uri, string token = "")
+            public async Task<TResult> GetAsync<TResult>(string uri)
             {
-                HttpClient httpClient = CreateHttpClient(token:token);
+                HttpClient httpClient = createHttpClient();
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
 
                 await HandleResponse(response);
@@ -40,9 +41,9 @@ namespace GranularMonitorSystem.Services.API.Requests
                 return result;
             }
 
-            public async Task<TResult> PostAsync<TResult>(string uri, TResult data, string token = "", string header = "")
+            public async Task<TResult> PostAsync<TResult>(string uri, TResult data, string header = "")
             {
-            HttpClient httpClient = CreateHttpClient(token:token);
+                HttpClient httpClient = createHttpClient();
 
                 if (!string.IsNullOrEmpty(header))
                 {
@@ -64,7 +65,7 @@ namespace GranularMonitorSystem.Services.API.Requests
 
             public async Task<TResult> PostAsync<TResult>(string uri, string data, string clientId, string clientSecret)
             {
-                HttpClient httpClient = CreateHttpClient(string.Empty);
+                HttpClient httpClient = createHttpClient(string.Empty);
 
                 if (!string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
                 {
@@ -84,9 +85,9 @@ namespace GranularMonitorSystem.Services.API.Requests
                 return result;
             }
 
-            public async Task<TResult> PutAsync<TResult>(string uri, TResult data, string token = "", string header = "")
+            public async Task<TResult> PutAsync<TResult>(string uri, TResult data, string header = "")
             {
-                HttpClient httpClient = CreateHttpClient(token);
+                HttpClient httpClient = createHttpClient();
 
                 if (!string.IsNullOrEmpty(header))
                 {
@@ -106,23 +107,23 @@ namespace GranularMonitorSystem.Services.API.Requests
                 return result;
             }
 
-            public async Task DeleteAsync(string uri, string token = "")
+            public async Task DeleteAsync(string uri)
             {
-                HttpClient httpClient = CreateHttpClient(token);
+                HttpClient httpClient = createHttpClient();
                 await httpClient.DeleteAsync(uri);
             }
 
-            private HttpClient CreateHttpClient(string username = "", string password = "", string token = "")
+            private HttpClient createHttpClient(string username = "", string password = "")
             {
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                if (!string.IsNullOrEmpty(token))
+                if (!string.IsNullOrEmpty(Settings.AuthAccessToken))
                 {
-                    var byteArray = Encoding.UTF8.GetBytes( token + ":"+"unused");
+                    var byteArray = Encoding.UTF8.GetBytes( Settings.AuthAccessToken+ ":"+"unused");
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 }
-                else if(!string.IsNullOrEmpty(username) & !string.IsNullOrEmpty(password))
+                else if(!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
                 {
                     var byteArray = Encoding.UTF8.GetBytes( username + ":"+ password);
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
@@ -159,9 +160,9 @@ namespace GranularMonitorSystem.Services.API.Requests
 
                     if (response.StatusCode == HttpStatusCode.Forbidden || 
                     response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
+                    { 
+                        throw new ServiceAuthenticationException(content);
                         
-                        //throw new Exception();//ServiceAuthenticationException(content);
                     }
 
                     throw new HttpRequestExceptionEx(response.StatusCode, content);
@@ -170,7 +171,7 @@ namespace GranularMonitorSystem.Services.API.Requests
 
         public async Task<TResult> LoginAsync<TResult>(string uri,string username = "", string password = "")
         {
-            HttpClient httpClient = CreateHttpClient(username,password);
+            HttpClient httpClient = createHttpClient(username,password);
             HttpResponseMessage response = await httpClient.GetAsync(uri);
 
             await HandleResponse(response);
@@ -184,20 +185,5 @@ namespace GranularMonitorSystem.Services.API.Requests
             return result;  
         }
 
-        public async Task<string> LoginAsync(string uri, string username = "", string password = "")
-        {
-            HttpClient httpClient = CreateHttpClient(username, password);
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
-
-            await HandleResponse(response);
-            string token = response.RequestMessage.Headers.Authorization.Parameter;
-
-            string serialized = await response.Content.ReadAsStringAsync();
-
-            //TResult result = await Task.Run(() =>
-            //                                JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
-
-            return token;
-        }
     }
 }
