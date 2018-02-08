@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using GranularMonitorSystem.Services.API.Dashboard;
 using System.Windows.Input;
 using Xamarin.Forms;
+using GranularMonitorSystem.Exceptions;
+using GranularMonitorSystem.Services.RequestProvider;
 
 namespace GranularMonitorSystem
 {
@@ -26,9 +28,17 @@ namespace GranularMonitorSystem
                 OnUpdate(alertContainer);
                 IsBusy = false;
             }
+            catch (ServiceAuthenticationException e)
+            {
+                await DialogService.ShowAlertAsync(e.Content, "Authentication Error", "OK");
+            }
+            catch (HttpRequestExceptionEx  e)
+            {
+                await DialogService.ShowAlertAsync(e.HttpCode.ToString(), "HTTP Error", "OK");
+            }
             catch (Exception e)
             {
-                await DialogService.ShowAlertAsync("Exception",e.ToString(),"OK");
+                await DialogService.ShowAlertAsync(e.ToString(), "Error", "OK");
             }
         }
 

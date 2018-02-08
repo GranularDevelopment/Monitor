@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GranularMonitorSystem.Common;
+using GranularMonitorSystem.Exceptions;
 using GranularMonitorSystem.Services.API.Server;
+using GranularMonitorSystem.Services.RequestProvider;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -28,7 +29,22 @@ namespace GranularMonitorSystem
 
         public override  async Task InitializeAsync(object navigationData)
         {
-            await CreatePlotModel();
+            try
+            {
+                await CreatePlotModel();
+            }
+            catch (ServiceAuthenticationException e)
+            {
+                await DialogService.ShowAlertAsync(e.Content, "Authentication Error", "OK");
+            }
+            catch (HttpRequestExceptionEx  e)
+            {
+                await DialogService.ShowAlertAsync(e.HttpCode.ToString(), "HTTP Error", "OK");
+            }
+            catch (Exception e)
+            {
+                await DialogService.ShowAlertAsync(e.ToString(), "Error", "OK");
+            }
         }
 
         public async Task CreatePlotModel() 

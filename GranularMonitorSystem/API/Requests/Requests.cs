@@ -63,18 +63,18 @@ namespace GranularMonitorSystem.Services.API.Requests
                 return result;
             }
 
-            public async Task<TResult> PostAsync<TResult>(string uri, string data, string clientId, string clientSecret)
+            public async Task<TResult> GetAsync<TResult>(string uri, string clientId, string clientSecret)
             {
-                HttpClient httpClient = createHttpClient(string.Empty);
+                HttpClient httpClient = createHttpClient();
 
                 if (!string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
                 {
+                    var byteArray = Encoding.UTF8.GetBytes( clientId + ":"+ clientSecret);
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                     AddBasicAuthenticationHeader(httpClient, clientId, clientSecret);
                 }
 
-                var content = new StringContent(data);
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-                HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
 
                 await HandleResponse(response);
                 string serialized = await response.Content.ReadAsStringAsync();
@@ -113,7 +113,7 @@ namespace GranularMonitorSystem.Services.API.Requests
                 await httpClient.DeleteAsync(uri);
             }
 
-            private HttpClient createHttpClient(string username = "", string password = "")
+            private HttpClient createHttpClient()
             {
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -121,11 +121,6 @@ namespace GranularMonitorSystem.Services.API.Requests
                 if (!string.IsNullOrEmpty(Settings.AuthAccessToken))
                 {
                     var byteArray = Encoding.UTF8.GetBytes( Settings.AuthAccessToken+ ":"+"unused");
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-                }
-                else if(!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
-                {
-                    var byteArray = Encoding.UTF8.GetBytes( username + ":"+ password);
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
                 }
 
@@ -169,21 +164,21 @@ namespace GranularMonitorSystem.Services.API.Requests
                 }
             }
 
-        public async Task<TResult> LoginAsync<TResult>(string uri,string username = "", string password = "")
-        {
-            HttpClient httpClient = createHttpClient(username,password);
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
+        //public async Task<TResult> LoginAsync<TResult>(string uri,string username = "", string password = "")
+        //{
+        //    HttpClient httpClient = createHttpClient(username,password);
+        //    HttpResponseMessage response = await httpClient.GetAsync(uri);
 
-            await HandleResponse(response);
-            string token = response.RequestMessage.Headers.Authorization.Parameter;
+        //    await HandleResponse(response);
+        //    string token = response.RequestMessage.Headers.Authorization.Parameter;
 
-            string serialized = await response.Content.ReadAsStringAsync();
+        //    string serialized = await response.Content.ReadAsStringAsync();
 
-            TResult result = await Task.Run(() => 
-                                                JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
+        //    TResult result = await Task.Run(() => 
+        //                                        JsonConvert.DeserializeObject<TResult>(serialized, _serializerSettings));
 
-            return result;  
-        }
+        //    return result;  
+        //}
 
     }
 }
