@@ -31,8 +31,7 @@ namespace GranularMonitorSystem
             {
                 On = _on
             };
-            var token = Constants.TOKEN;
-            WebsiteContainer websiteContainer = await _websiteService.PostWebsiteAlertAsync(container, token);
+            WebsiteContainer websiteContainer = await _websiteService.PostWebsiteAlertAsync(container);
             await DialogService.ShowAlertAsync("Successful","Save","OK");
 
         }

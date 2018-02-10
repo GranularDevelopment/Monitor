@@ -21,8 +21,7 @@ namespace GranularMonitorSystem
 
 		public Task InitializeAsync()
         {
-			//if (string.IsNullOrEmpty(Settings.AuthAccessToken))
-            if (string.IsNullOrEmpty(Constants.TOKEN))
+			if (string.IsNullOrEmpty(Settings.AuthAccessToken))
 				return NavigateToAsync<LoginViewModel>();
 			else
 				return NavigateToAsync<DashboardViewModel>();

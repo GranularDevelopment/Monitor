@@ -15,16 +15,8 @@ namespace GranularMonitorSystem
 			InitializeComponent();
 		}
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
-            this.Content = null;
-
-            var  vm = BindingContext as ServerMemoryViewModel; 
-
-            this.Content = new PlotView
-            {
-                Model = await vm.CreatePlotModel()
-            }; 
             base.OnAppearing();
         }
      }

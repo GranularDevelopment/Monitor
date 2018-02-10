@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using GranularMonitorSystem.Model;
 using GranularMonitorSystem.Common;
-using GranularMonitorSystem.Services.RequestProvider;
 using GranularMonitorSystem.Services.API.Requests;
 
 namespace GranularMonitorSystem.Services.API.Identity
@@ -20,7 +19,7 @@ namespace GranularMonitorSystem.Services.API.Identity
         {
             UriBuilder builder = new UriBuilder(Constants.URL_TOKEN);
             string uri = builder.ToString();
-            User user = await _requests.LoginAsync<User>(uri, username, password);
+            User user = await _requests.GetAsync<User>(uri, username, password);
 
             return user;
         }

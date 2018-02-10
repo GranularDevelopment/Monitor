@@ -7,7 +7,7 @@ namespace GranularMonitorSystem.Services.API.Website
 {
     public interface IWebsiteService
     {
-        Task<WebsiteContainer> GetWebsiteAsync(string token);
-        Task<WebsiteContainer> PostWebsiteAlertAsync( WebsiteContainer container, string token);
+        Task<WebsiteContainer> GetWebsiteAsync();
+        Task<WebsiteContainer> PostWebsiteAlertAsync( WebsiteContainer container);
     }
 }

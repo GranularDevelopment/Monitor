@@ -10,17 +10,9 @@ namespace GranularMonitorSystem
 
         }
 
-        public override async Task InitializeAsync(object navigationData)
+        public override Task InitializeAsync(object navigationData)
         {
-            try
-            {
-                //ibase.InitializeAsync(navigationData);
-            }
-            catch (Exception e)
-            {
-                await DialogService.ShowAlertAsync("Exception", e.ToString(), "OK");
-
-            }
+            return Task.FromResult(false);
         }
     }
 }
