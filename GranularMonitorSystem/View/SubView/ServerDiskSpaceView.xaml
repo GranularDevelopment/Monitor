@@ -6,6 +6,14 @@
     xmlns:viewModelBase="clr-namespace:GranularMonitorSystem;assembly=GranularMonitorSystem"
     xmlns:behaviors="clr-namespace:GranularMonitorSystem.Behaviors;assembly=GranularMonitorSystem"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true" >
+    <ContentPage.ToolbarItems>  
+    <ToolbarItem Text ="Today"  
+                Priority="0" Order="Primary" Command="{Binding TodayCommand}"/>  
+    <ToolbarItem Text ="Week"  
+              Priority="1" Order="Primary" Command="{Binding WeekCommand}"/>  
+    <ToolbarItem Text ="Month"  
+              Priority="1" Order="Primary" Command="{Binding MonthCommand}" />  
+  </ContentPage.ToolbarItems>  
     <AbsoluteLayout >
     <oxyplot:PlotView
             AbsoluteLayout.LayoutFlags="All"

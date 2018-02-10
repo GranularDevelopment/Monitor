@@ -153,6 +153,7 @@
     <Compile Include="View\SubView\ServerMemoryView.xaml.cs">
       <DependentUpon>..\..\SubView\ServerMemoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums\TimeRange.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OxyPlot">
@@ -233,6 +234,7 @@
     <Folder Include="ViewModel\Login\" />
     <Folder Include="Exceptions\" />
     <Folder Include="View\SubView\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GranularMonitorSystem.Common\GranularMonitorSystem.Common.csproj">
