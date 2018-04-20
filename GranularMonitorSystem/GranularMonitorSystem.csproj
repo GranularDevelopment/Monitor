@@ -44,7 +44,7 @@
     <EmbeddedResource Include="View\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SignUpPage.xaml">
+    <EmbeddedResource Include="View\SignUpView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CustomNavigationView.xaml">
@@ -60,6 +60,10 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SubView\ServerMemoryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -83,8 +87,8 @@
     <Compile Include="View\LoginView.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SignUpPage.xaml.cs">
-      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    <Compile Include="View\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="View\CustomNavigationView.xaml.cs">
@@ -154,6 +158,13 @@
       <DependentUpon>..\..\SubView\ServerMemoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enums\TimeRange.cs" />
+    <Compile Include="View\AddView.xaml.cs">
+      <DependentUpon>AddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AddViewModel.cs" />
+    <Compile Include="Converters\ValueChangedEventArgsConverter.cs" />
+    <Compile Include="Converters\ItemTappedEventConverter.cs" />
+    <Compile Include="ViewModel\Login\SignUpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OxyPlot">
@@ -235,6 +246,8 @@
     <Folder Include="Exceptions\" />
     <Folder Include="View\SubView\" />
     <Folder Include="Enums\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GranularMonitorSystem.Common\GranularMonitorSystem.Common.csproj">

@@ -7,5 +7,6 @@ namespace GranularMonitorSystem.Services.API.Identity
     public interface IIdentityService
     {
         Task<User> LoginAsync<User>(string username, string password);
+        Task<User> SignUpAsync<User>(User model);
     }
 }

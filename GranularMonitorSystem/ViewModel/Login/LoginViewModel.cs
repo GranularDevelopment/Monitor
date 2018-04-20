@@ -33,6 +33,8 @@ namespace GranularMonitorSystem
         }
 
         public ICommand SignInCommand => new Command(async () => await SignInAsync());
+        public ICommand SignUpCommand => new Command(async () => await SignUpAsync());
+        public ICommand ForgotPasswordCommand => new Command(async () => await ForgotPasswordAsync());
 
         private async Task SignInAsync()
         {
@@ -41,6 +43,16 @@ namespace GranularMonitorSystem
             await LoginAndGetTokenAsync();
 
             IsBusy = false;
+        }
+
+        private async Task SignUpAsync()
+        {
+            await NavigationService.NavigateToAsync<SignUpViewModel>();
+        }
+
+        private async Task ForgotPasswordAsync()
+        {
+            
         }
         
         public async Task LoginAndGetTokenAsync()

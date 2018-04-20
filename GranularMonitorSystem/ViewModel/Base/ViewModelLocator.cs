@@ -39,7 +39,9 @@ namespace GranularMonitorSystem
             //View models
             builder.RegisterType<DashboardViewModel>();
             builder.RegisterType<LoginViewModel>();
+            builder.RegisterType<SignUpViewModel>();
             builder.RegisterType<TaskViewModel>();
+            builder.RegisterType<AddViewModel>();
 
             builder.RegisterType<WebsiteViewModel>();
             builder.RegisterType<EditWebsiteViewModel>();

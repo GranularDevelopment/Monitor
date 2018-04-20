@@ -2,7 +2,22 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="GranularMonitorSystem.App">
-	<Application.Resources>
-		<!-- Application resource dictionary -->
-	</Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BorderColor" Value="Lime" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="BorderWidth" Value="5" />
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="TextColor" Value="Teal" />
+            </Style>
+
+            <Color x:Key="backgroundColor">#33302E</Color>
+            <Color x:Key="textColor">White</Color>
+ 
+            
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

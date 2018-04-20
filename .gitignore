@@ -1,5 +1,6 @@
 Debug/
 *Constants.cs
+*.vs
 # Autosave files
 *~
 

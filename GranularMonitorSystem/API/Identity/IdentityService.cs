@@ -20,7 +20,14 @@ namespace GranularMonitorSystem.Services.API.Identity
             UriBuilder builder = new UriBuilder(Constants.URL_TOKEN);
             string uri = builder.ToString();
             User user = await _requests.GetAsync<User>(uri, username, password);
+            return user;
+        }
 
+        public async Task<User> SignUpAsync<User>(User model)
+        {
+            UriBuilder builder = new UriBuilder(Constants.URL_SIGNUP);
+            string uri = builder.ToString();
+            User user = await _requests.PostAsync<User>(uri, model);
             return user;
         }
     }

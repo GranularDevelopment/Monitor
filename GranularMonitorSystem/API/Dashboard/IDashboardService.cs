@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace GranularMonitorSystem.Services.API.Dashboard

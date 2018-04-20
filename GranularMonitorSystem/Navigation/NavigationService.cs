@@ -50,6 +50,16 @@ namespace GranularMonitorSystem
 			return Task.FromResult(true);
 		}
 
+        public async Task PopAsync()
+        {
+            var mainPage = Application.Current.MainPage as CustomNavigationView;
+
+            if (mainPage != null)
+            {
+                await mainPage.Navigation.PopAsync();
+            }
+        }
+
 		public Task RemoveBackStackAsync()
 		{
 			var mainPage = Application.Current.MainPage as CustomNavigationView;

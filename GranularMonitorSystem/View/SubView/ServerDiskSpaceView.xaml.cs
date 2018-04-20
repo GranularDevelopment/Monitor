@@ -18,7 +18,7 @@ namespace GranularMonitorSystem
 
         public ServerDiskSpaceView()
 		{
-            Debug.WriteLine(String.Format("Creating ServerDiskSpaceView , instances{0}",Interlocked.Increment(ref counter)));
+            //Debug.WriteLine(String.Format("Creating ServerDiskSpaceView , instances{0}",Interlocked.Increment(ref counter)));
             InitializeComponent();
 		}
 

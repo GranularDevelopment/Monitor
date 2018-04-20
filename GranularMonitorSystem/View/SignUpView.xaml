@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="GranularMonitorSystem.LoginView"
+    x:Class="GranularMonitorSystem.SignUpView"
     xmlns:viewModelBase="clr-namespace:GranularMonitorSystem;assembly=GranularMonitorSystem"
     xmlns:behaviors="clr-namespace:GranularMonitorSystem.Behaviors;assembly=GranularMonitorSystem"
     xmlns:local="clr-namespace:GranularMonitorSystem.Common.Renderers;assembly=GranularMonitorSystem.Common"
@@ -9,7 +9,7 @@
     <ContentPage.Title>
         <OnPlatform
             x:TypeArguments="x:String"
-            iOS=" Login "/>
+            iOS="Sign Up"/>
     </ContentPage.Title>
       <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -19,7 +19,7 @@
     <ScrollView>
         <StackLayout VerticalOptions="StartAndExpand"> 
 
-            <Label Text="Monitor"
+            <Label Text="Create an Account"
                    FontSize="Large" 
                    HorizontalOptions="Center"
                    FontAttributes="Bold"
@@ -37,7 +37,7 @@
                                  HeightRequest="40"
                                  Text="{Binding Username.Value, Mode=TwoWay}" />
 
-			<Entry x:Name="passwordEntry" 
+            <Entry x:Name="passwordEntry" 
                    Margin="40,0,40,20"
                    IsPassword="true" 
                    Placeholder="Password" 
@@ -45,33 +45,13 @@
                    Text="{Binding Password.Value, Mode=TwoWay}"/>
 
             <Button Margin="80,20,80,20" 
-                    Text="[ Sign In ]"
+                    Text="[ Sign Up ]"
                     FontSize="Medium"
                     FontAttributes = "Bold" 
                     TextColor = "{StaticResource textColor}"
                     BackgroundColor="{StaticResource backgroundColor}"
-                    Command="{Binding SignInCommand}"
-                        />
-            <StackLayout
-                Margin="20,0,20,0"
-                Orientation="Horizontal"
-                HorizontalOptions="FillAndExpand"
-                > 
-
-                <Button 
-                    HorizontalOptions="StartAndExpand"
-                    Text="Forgot Password"
-                    Command="{Binding ForgotPasswordCommand}"
-                        />
-
-                <Button 
-                    HorizontalOptions="EndAndExpand"
-                    Text="Sign up"
                     Command="{Binding SignUpCommand}"
                         />
-
-            </StackLayout>
         </StackLayout>
-
     </ScrollView>
 </ContentPage>

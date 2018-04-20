@@ -15,5 +15,7 @@ namespace GranularMonitorSystem
 		Task RemoveLastFromBackStackAsync();
 
 		Task RemoveBackStackAsync();
+
+        Task PopAsync();
 	}
 }
