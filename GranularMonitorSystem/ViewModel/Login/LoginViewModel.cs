@@ -52,7 +52,7 @@ namespace GranularMonitorSystem
 
         private async Task ForgotPasswordAsync()
         {
-            
+            await NavigationService.NavigateToAsync<ForgotPasswordViewModel>();
         }
         
         public async Task LoginAndGetTokenAsync()

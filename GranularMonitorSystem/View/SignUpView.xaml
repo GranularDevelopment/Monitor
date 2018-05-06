@@ -33,7 +33,7 @@
 
             <local:NoHelperEntry x:Name="usernameEntry" 
                                  Margin="40,0,40,20"
-                                 Placeholder="User Id"
+                                 Placeholder="Email"
                                  HeightRequest="40"
                                  Text="{Binding Username.Value, Mode=TwoWay}" />
 

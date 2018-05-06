@@ -8,18 +8,16 @@ namespace GranularMonitorSystem
 {
     public class AddViewModel:ViewModelBase
     {
-        public ICommand ValueChangedCommand => new Command(async(obj) => await SliderChanged(obj));
+        public ICommand ValueChangedCommand => new Command((obj) => SliderChanged(obj));
 
-        private async Task SliderChanged(object obj)
+        private void SliderChanged(object obj)
         {
             long convert = Convert.ToInt64(Math.Round(Convert.ToDouble(obj))); 
-
-            Debug.WriteLine(convert);
-
         }
 
         public AddViewModel()
         {
         }
+
     }
 }

@@ -25,9 +25,15 @@ namespace GranularMonitorSystem
         private void InitApp()
         {
             if(Settings.UseMocks)
+            {
                 ViewModelLocator.RegisterDependencies(true);
+                Constants.UseMockServices(true);
+            }
             else
+            {
                 ViewModelLocator.RegisterDependencies(false);
+                Constants.UseMockServices(false);
+            }
         }
 
 		private Task InitNavigation()

@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 namespace GranularMonitorSystem
 {
     public class DashboardViewModel : ViewModelBase
+
     {
         private readonly IDashboardService _dashboardService;
 
@@ -68,19 +69,11 @@ namespace GranularMonitorSystem
 
             foreach(AlertModel model in alertContainer.alert)
             { 
-                if (model.Name == "website")
-                {
-                    WebsiteStatus = (model.StatusCode == "200") ? "status-ok" : "status-error";
-                }
-                else if (model.Name == "server")
-                {
-                    ServerStatus = (model.StatusCode == "200") ? "status-ok" : "status-error";
-                }
 
                 AlertContainers.Add(new AlertModel{
-                    StatusCode = model.StatusCode,
                     Name = model.Name,
-                    Description = model.Description
+                    Description = model.Description,
+                    StatusCode = (model.StatusCode == "200") ? "status-ok.png" : "status-error.png",
                 });
             }
         }

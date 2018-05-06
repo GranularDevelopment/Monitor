@@ -146,12 +146,6 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\monitor.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\list.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\server.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\server.imageset\server.png" />
-    <ImageAsset Include="Assets.xcassets\list.imageset\list.png" />
-    <ImageAsset Include="Assets.xcassets\monitor.imageset\monitor.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Granular.png" />
     <ImageAsset Include="Assets.xcassets\status-ok.imageset\checked.png" />
     <ImageAsset Include="Assets.xcassets\status-ok.imageset\Contents.json" />
@@ -159,8 +153,6 @@
     <ImageAsset Include="Assets.xcassets\status-warning.imageset\error-triangle.png" />
     <ImageAsset Include="Assets.xcassets\status-error.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\status-error.imageset\exclamation.png" />
-    <ImageAsset Include="Assets.xcassets\plus-circle.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\plus-circle.imageset\plus-button.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

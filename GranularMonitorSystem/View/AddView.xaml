@@ -40,17 +40,23 @@
                    Margin="40,0,40,20"
                    HeightRequest="40"
                    />
-
+            <StackLayout Orientation="Horizontal">
             <Label 
-                Text="Interval"
-                HorizontalOptions="Center"
+                Text="Interval:"
+                HorizontalOptions="Start"
                 Margin="40,0,40,0"/>
-
+            <Label 
+                Text="{Binding Source={x:Reference interval},
+                    Path=Value,
+                    StringFormat='{0:F0}'}"
+                HorizontalOptions="End"
+                />
+            </StackLayout>
             <Slider x:Name="interval"
                     Margin="40,0,40,0"
                     Maximum="60"
                     Minimum="1"  
-                    Value="{Binding minutes, Mode=TwoWay}" >
+                    Value="{Binding Interval, Mode=TwoWay}" >
                 
                 <Slider.Behaviors>
                     <OnPlatform x:TypeArguments="Behavior">

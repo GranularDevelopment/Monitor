@@ -40,7 +40,7 @@ namespace GranularMonitorSystem
             builder.RegisterType<DashboardViewModel>();
             builder.RegisterType<LoginViewModel>();
             builder.RegisterType<SignUpViewModel>();
-            builder.RegisterType<TaskViewModel>();
+            builder.RegisterType<ForgotPasswordViewModel>();
             builder.RegisterType<AddViewModel>();
 
             builder.RegisterType<WebsiteViewModel>();
@@ -80,6 +80,21 @@ namespace GranularMonitorSystem
             _container = builder.Build();
 
         }
+
+        public static void UpdateDependencies(bool useMockServices)
+        {
+            // Change injected dependencies
+            if (useMockServices)
+            {
+
+                UseMockService = true;
+            }
+            else
+            {
+                UseMockService = false;
+            }
+        }
+
 
         public static T Resolve<T>()
         {

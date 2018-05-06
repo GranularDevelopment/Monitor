@@ -35,9 +35,6 @@
     <EmbeddedResource Include="View\WebsiteView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TasksPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\ServerView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -66,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ForgotPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -77,9 +78,6 @@
     </Compile>
     <Compile Include="View\WebsiteView.xaml.cs">
       <DependentUpon>WebsiteView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TasksPage.xaml.cs">
-      <DependentUpon>TasksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ServerView.xaml.cs">
       <DependentUpon>ServerView.xaml</DependentUpon>
@@ -103,7 +101,6 @@
     <Compile Include="Validation\IValidationRule.cs" />
     <Compile Include="Validation\IValidity.cs" />
     <Compile Include="Validation\ValidatableObject.cs" />
-    <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="Behaviors\BindableBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="ViewModel\Base\ViewModelLocator.cs" />
@@ -116,8 +113,6 @@
     <Compile Include="ViewModel\Server\ServerIOViewModel.cs" />
     <Compile Include="ViewModel\Website\WebsiteViewModel.cs" />
     <Compile Include="ViewModel\Website\EditWebsiteViewModel.cs" />
-    <Compile Include="Models\DatabaseModel.cs" />
-    <Compile Include="Models\TasksModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Alert\AlertContainer.cs" />
     <Compile Include="Models\Alert\AlertModel.cs" />
@@ -165,6 +160,10 @@
     <Compile Include="Converters\ValueChangedEventArgsConverter.cs" />
     <Compile Include="Converters\ItemTappedEventConverter.cs" />
     <Compile Include="ViewModel\Login\SignUpViewModel.cs" />
+    <Compile Include="ViewModel\Login\ForgotPasswordViewModel.cs" />
+    <Compile Include="View\ForgotPasswordView.xaml.cs">
+      <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OxyPlot">
