@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+            xmlns:local="clr-namespace:Monitor.Controls;assembly=Monitor"
+            xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
+            xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
+            xmlns:converters="clr-namespace:Monitor.Converters; assembly=Monitor"
+            viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+            x:Name="DashboardPage"
+            Title="Dashboard"
+            x:Class="Monitor.DashboardView">
+
+   <!-- Keep ContentPage.Resources outside of ContentPage.Content -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common:Inverse x:Key="boolNegation" />
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+    <ListView x:Name="listView"   
+              HasUnevenRows="true" 
+              SeparatorVisibility="None"  
+              ItemsSource="{Binding AlertContainers}"
+              SelectedItem="{Binding monitorSelected}"
+              >
+              <ListView.Behaviors>
+                                    <behaviors:EventToCommandBehavior
+                                        EventName="ItemTapped"
+                                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                                        Command="{Binding EditCommand}" />
+                                </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                        <Frame Padding="10" Margin="0,5,0,5" HeightRequest="150">
+                                <StackLayout HorizontalOptions="Center">
+                                    <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
+                                    <Label Text="{Binding Description}" VerticalTextAlignment="Center" />
+                                    <Image Source="{Binding StatusCode}" />
+                                </StackLayout>
+                        </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+      <Button Margin="80,20,80,20" 
+                    Text="[ Add Monitor ]"
+                    FontSize="Medium"
+                    FontAttributes = "Bold" 
+                    TextColor = "{StaticResource textColor}"
+                    BackgroundColor="{StaticResource backgroundColor}"
+                    Command="{Binding AddCommand}"
+                        />
+
+    </StackLayout>
+</ContentPage>

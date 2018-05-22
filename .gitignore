@@ -1,5 +1,6 @@
 Debug/
 *Constants.cs
+*GlobalSettings.cs
 *.vs
 # Autosave files
 *~
