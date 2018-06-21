@@ -14,7 +14,7 @@
    <!-- Keep ContentPage.Resources outside of ContentPage.Content -->
     <ContentPage.Resources>
         <ResourceDictionary>
-            <common:Inverse x:Key="boolNegation" />
+            <common:InverseConverter x:Key="boolNegation" />
             <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -39,7 +39,8 @@
                                 <StackLayout HorizontalOptions="Center">
                                     <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
                                     <Label Text="{Binding Description}" VerticalTextAlignment="Center" />
-                                    <Image Source="{Binding StatusCode}" />
+                                    <Image Source="{Binding StatusCode}"
+                                           HeightRequest="20"/>
                                 </StackLayout>
                         </Frame>
                 </ViewCell>
@@ -50,9 +51,8 @@
       <Button Margin="80,20,80,20" 
                     Text="[ Add Monitor ]"
                     FontSize="Medium"
+                    Style="{StaticResource submitButtonStyle}" 
                     FontAttributes = "Bold" 
-                    TextColor = "{StaticResource textColor}"
-                    BackgroundColor="{StaticResource backgroundColor}"
                     Command="{Binding AddCommand}"
                         />
 

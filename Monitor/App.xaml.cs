@@ -23,8 +23,7 @@ namespace Monitor
 
         private void InitApp()
         {
-            //if(Settings.UseMocks)
-			if(true)
+            if(Settings.UseMocks)
             {
                 ViewModelLocator.RegisterDependencies(true);
                 Constants.UseMockServices(true);

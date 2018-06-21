@@ -22,6 +22,10 @@
     <Compile Remove="View\SubView\ServerDiskSpaceView.xaml.cs" />
     <Compile Remove="View\SubView\ServerIOView.xaml.cs" />
     <Compile Remove="View\SubView\ServerMemoryView.xaml.cs" />
+    <Compile Remove="Behaviors\LineColorBehavior.cs" />
+    <Compile Remove="Effects\EntryLineColorEffect.cs" />
+    <Compile Remove="Models\Website\WebsiteContainer.cs" />
+    <Compile Remove="API\Website\IWebsiteService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="View\ServerView.xaml" />
@@ -40,11 +44,16 @@
     <None Include="View\ForgotPasswordView.xaml" />
     <None Include="View\LoginView.xaml" />
     <None Include="View\SignUpView.xaml" />
-    <None Include="View\WebsiteView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
     <Folder Include="Effects\" />
+    <Folder Include="Images\" />
+    <Folder Include="Extension\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Services\Supervisor\" />
+    <Folder Include="Models\Supervisor\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="View\AddView.xaml.cs">
@@ -66,7 +75,7 @@
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\WebsiteView.xaml.cs">
-      <DependentUpon>WebsiteView.xaml</DependentUpon>
+      <DependentUpon>MonitorView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

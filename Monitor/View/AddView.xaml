@@ -4,12 +4,79 @@
              xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
              xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
              xmlns:converters="clr-namespace:Monitor.Converters;assembly=Monitor"
-             xmlns:local="clr-namespace:Monitor.Common.Renderers;assembly=Monitor"
+             xmlns:local="clr-namespace:Monitor.Renderers;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
              x:Class="Monitor.AddView">
+
     <ContentPage.Resources> 
     <ResourceDictionary>
         <converters:ValueChangedEventArgsConverter x:Key="ValueChangedEventArgsConverter" />
+
+             <converters:BooleanToObjectConverter x:Key="boolToStyleImage"
+                                              x:TypeArguments="Style">
+
+          <!--  <converters:BooleanToObjectConverter.FalseObject>
+               <Style TargetType="Image">
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="Source" Value="error.png" />
+               </Style>
+            </converters:BooleanToObjectConverter.FalseObject>-->
+
+            <converters:BooleanToObjectConverter.TrueObject>
+                <Style TargetType="Image">
+                 <Setter Property="HeightRequest" Value="20" />
+                 <Setter Property="Source" Value="success.png" />
+                </Style>
+            </converters:BooleanToObjectConverter.TrueObject>
+
+        </converters:BooleanToObjectConverter>
+
+            <Style x:Key="baseStyle" TargetType="Label">
+                <Setter Property="XAlign" Value="Start" />
+                <Setter Property="YAlign" Value="Center" />
+                <Setter Property="FontSize" Value="Micro" />
+                <Setter Property="FontAttributes" Value="Italic" />
+            </Style>
+            
+        <converters:BooleanToObjectConverter x:Key="boolToStyleName"
+                                           x:TypeArguments="Style">
+
+            <converters:BooleanToObjectConverter.FalseObject>
+                <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+                <Setter Property="TextColor" Value="#F44336" />
+                <Setter Property="Text" Value="Enter a valid name" />
+                </Style>
+            </converters:BooleanToObjectConverter.FalseObject>
+        
+            <converters:BooleanToObjectConverter.TrueObject>
+                <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+                <Setter Property="TextColor" Value="#4CAF50" />
+                <Setter Property="Text" Value="Your name looks good" />
+                </Style>
+            </converters:BooleanToObjectConverter.TrueObject>
+
+        </converters:BooleanToObjectConverter>
+
+
+        <converters:BooleanToObjectConverter x:Key="boolToStyleURL"
+                                           x:TypeArguments="Style">
+
+        <converters:BooleanToObjectConverter.FalseObject>
+           <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+            <Setter Property="TextColor" Value="#F44336" />
+            <Setter Property="Text" Value="Enter a valid URL" />
+          </Style>
+        </converters:BooleanToObjectConverter.FalseObject>
+        
+        <converters:BooleanToObjectConverter.TrueObject>
+          <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+            <Setter Property="TextColor" Value="#4CAF50" />
+            <Setter Property="Text" Value="Your URL looks good" />
+          </Style>
+        </converters:BooleanToObjectConverter.TrueObject>
+
+        </converters:BooleanToObjectConverter>
+            
     </ResourceDictionary>
 </ContentPage.Resources>
  <ContentPage.Padding>
@@ -18,43 +85,118 @@
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout 
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            >
+    <ScrollView>
+    <StackLayout>
 
-            <Label HorizontalOptions="Center" 
-                   Text="Monitor Name"  />
 
-            <Entry Placeholder="Name" 
-                   Text="{Binding Name}"
-                   Style="{StaticResource entryStyle}"
-                   />
+    <Grid Padding="0,40,0,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="40" />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+      
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="40" />
+      </Grid.ColumnDefinitions> 
+
+        <Label HorizontalOptions="Center" 
+               Text="Monitor Name"
+               Grid.Row="0"
+               Grid.Column="1"
+               />
+
+         <local:NoHelperEntry
+            Grid.Row="1"
+            Grid.Column="1"
+            Style="{StaticResource entryStyle}"
+            x:Name="nameEntry"
+            Placeholder="Name"
+            Text="{Binding Name.Value, Mode=TwoWay}" >
+                <Entry.Behaviors>
+                    <behaviors:NonEmptyValidatorBehavior x:Name="nonEmptyValidator"/>
+                </Entry.Behaviors>
+        </local:NoHelperEntry>
+
+            <Image Grid.Row="1" 
+                   Grid.Column="2"
+                   x:Name="nameSuccessErrorImage"
+                   Style="{Binding Source={x:Reference nonEmptyValidator}, 
+                                Path=IsValid, 
+                               Converter={StaticResource boolToStyleImage}}"/>
+           <Label 
+                    Grid.Row="2" 
+                    Grid.Column="1" 
+                    HorizontalOptions="Center" 
+                    Style="{Binding Source={x:Reference nonEmptyValidator}, 
+                                Path=IsValid,
+                                Converter={StaticResource boolToStyleName}}" />
 
             <Label Text="Address / IP"
                    HorizontalOptions="Center"
+                   Grid.Row="3"
+                   Grid.Column="1"
                    />
 
-            <Entry Placeholder="URL"
+
+            <Entry 
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   x:Name="URLEntry" 
                    Style="{StaticResource entryStyle}"
-                   />
-            <StackLayout Orientation="Horizontal">
+                   Placeholder="http(s)://example.com" 
+                   Text="{Binding URL.Value, Mode=TwoWay}">
+                   <Entry.Behaviors>
+                    <behaviors:URLValidatorBehavior x:Name="urlValidator"/>
+                </Entry.Behaviors>
+            </Entry>
+
+                <Image Grid.Row="4" 
+                   Grid.Column="2"
+                   x:Name="urlSuccessErrorImage"
+                   Style="{Binding Source={x:Reference urlValidator}, 
+                                Path=IsValid, 
+                                Converter={StaticResource boolToStyleImage}}"/>
+
+             <Label 
+                    Grid.Row="5" 
+                    Grid.Column="1" 
+                    HorizontalOptions="Center" 
+                    Style="{Binding Source={x:Reference urlValidator}, 
+                                Path=IsValid,
+                                Converter={StaticResource boolToStyleURL}}" />
+
+
             <Label 
+                Grid.Row="7"
+                Grid.Column="1"
                 Text="Interval (minutes):"
                 HorizontalOptions="Start"
                 Margin="40,0,40,0"/>
-            <Label 
+
+             <Label 
+                Grid.Row="7"
+                Grid.Column="1"
                 Text="{Binding Source={x:Reference interval},
-                    Path=Value,
-                    StringFormat='{0:F0}'}"
+                Path=Value,
+                StringFormat='{0:F0}'}"
                 HorizontalOptions="End"
                 />
-            </StackLayout>
-            <Slider x:Name="interval"
-                    Margin="40,0,40,0"
-                    Maximum="60"
-                    Minimum="1"  
-                    Value="{Binding Interval, Mode=TwoWay}" >
+
+            <Slider
+                Grid.Row="8"
+                Grid.ColumnSpan="3"
+                x:Name="interval"
+                Margin="40,0,40,0"
+                Maximum="60"
+                Minimum="1"  
+                Value="{Binding Interval, Mode=TwoWay}" >
                 
                 <Slider.Behaviors>
                     <OnPlatform x:TypeArguments="Behavior">
@@ -70,12 +212,14 @@
                         </OnPlatform>
                 </Slider.Behaviors>
             </Slider>
-            
+
+            </Grid>
             <Button Style="{StaticResource submitButtonStyle}"
                     Text="[ Add Monitor ]"
-                    Command="{Binding AddCommand}"
+                    Command="{Binding AddMonitorCommand}"
                         />
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

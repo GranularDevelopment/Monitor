@@ -3,10 +3,8 @@ using Autofac;
 using Xamarin.Forms;
 using System.Reflection;
 using System.Globalization;
-using Monitor.Services.API.Requests;
-using Monitor.Services.API.Identity;
-using Monitor.Services.API.Website;
-using Monitor.Services.API.Dashboard;
+using Monitor.Services.Requests;
+using Monitor.Services.Identity;
 
 namespace Monitor
 {
@@ -42,8 +40,7 @@ namespace Monitor
             builder.RegisterType<ForgotPasswordViewModel>();
             builder.RegisterType<AddViewModel>();
 			builder.RegisterType<MasterDetailViewModel>();
-            builder.RegisterType<WebsiteViewModel>();
-            builder.RegisterType<EditWebsiteViewModel>();
+            builder.RegisterType<MonitorViewModel>();
 
             //Sub View models
 
@@ -56,14 +53,11 @@ namespace Monitor
 
             if (useMockServices)
             {
-				builder.RegisterType<WebsiteService>().As<IWebsiteService>();
-                builder.RegisterType<DashboardService>().As<IDashboardService>();
+				builder.RegisterType<MonitorService>().As<IMonitorService>();
             }
             else
             {
-
-                builder.RegisterType<WebsiteService>().As<IWebsiteService>();
-                builder.RegisterType<DashboardService>().As<IDashboardService>();
+				builder.RegisterType<MonitorService>().As<IMonitorService>();
             }
 
             if(_container != null)

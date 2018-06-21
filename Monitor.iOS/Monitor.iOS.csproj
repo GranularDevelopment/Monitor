@@ -142,6 +142,10 @@
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\hamburger.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\hamburger.imageset\hamburger.png" />
+    <ImageAsset Include="Assets.xcassets\error.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\error.imageset\error.png" />
+    <ImageAsset Include="Assets.xcassets\success.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\success.imageset\success.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -163,5 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\hamburger.imageset\" />
+    <Folder Include="Assets.xcassets\error.imageset\" />
+    <Folder Include="Assets.xcassets\success.imageset\" />
   </ItemGroup>
 </Project>

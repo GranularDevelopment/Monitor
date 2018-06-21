@@ -9,11 +9,12 @@
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="BackgroundColor" Value="#33302E" />
+                <Setter Property="HeightRequest" Value="40" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
 
             <Style x:Key="entryStyle" TargetType="Entry">
-                <Setter Property="Margin" Value="40,0,40,20" />
+                <Setter Property="Margin" Value="40,0,0,0" />
                 <Setter Property="HeightRequest" Value="40" />
             </Style>
 
