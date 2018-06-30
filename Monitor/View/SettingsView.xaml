@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Monitor;assembly=Monitor"
+             xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+             xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
+             xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             Title="Settings"
+             x:Class="Monitor.SettingsView"
+             BackgroundImage="background.png"
+             >
+    <ContentView.Content>
+     <ScrollView>
+        <StackLayout > 
+
+            <Label Text="Subcription Status"
+                   FontSize="Medium" 
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,20"/>
+
+
+            <Label Text="Free"
+                   FontSize="Medium" 
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,20"/>
+
+            <Label Text="1 free monitor"
+                   FontSize="Micro" 
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,20"/>
+
+
+
+
+        <Grid Padding="0,40,0,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="40" />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+      
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="40" />
+      </Grid.ColumnDefinitions> 
+
+
+
+              </Grid>
+            <StackLayout>
+            <Button Style="{StaticResource submitButtonStyle}" 
+                    Text="[ Upgrade ]"
+                        />
+
+            </StackLayout>
+            <StackLayout
+                Margin="20,0,20,0"
+                Orientation="Horizontal"
+                HorizontalOptions="FillAndExpand"
+                > 
+
+
+
+            </StackLayout>
+        </StackLayout>
+
+    </ScrollView>
+    </ContentView.Content>
+</ContentPage>

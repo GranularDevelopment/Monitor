@@ -41,6 +41,7 @@ namespace Monitor
             builder.RegisterType<AddViewModel>();
 			builder.RegisterType<MasterDetailViewModel>();
             builder.RegisterType<MonitorViewModel>();
+            builder.RegisterType<SettingsViewModel>();
 
             //Sub View models
 

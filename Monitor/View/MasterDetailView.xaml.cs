@@ -29,6 +29,7 @@ namespace Monitor
 				var page = (Page)Activator.CreateInstance(item.TargetType);
 				if (page is LoginView)
                 {
+                    Settings.AuthAccessToken =string.Empty;
 
 					await Navigation.PopToRootAsync();
                     await ((page.BindingContext as ViewModelBase)).InitializeAsync(null);

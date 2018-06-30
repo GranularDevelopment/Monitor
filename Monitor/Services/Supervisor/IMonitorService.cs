@@ -10,5 +10,6 @@ namespace Monitor
 		Task<MonitorModel> GetMonitorAsync(MonitorModel monitor);
 		Task<MonitorContainer> GetMonitorsAsync();
 		Task<MonitorModel> EditMonitorAsync(MonitorModel model);
+        Task<MonitorModel> DeleteMonitorAsync(MonitorModel model);
     }
 }

@@ -22,6 +22,10 @@ namespace Monitor
 
         public ICommand EditCommand => new Command(async (sender)   => await EditCommandAsync(sender));
         public ICommand AddCommand => new Command(async ()   => await AddCommandAsync());
+        public ICommand RefreshMonitorCommand => new Command(async() => await RefreshMonitorCommandAsync());
+        public ICommand OnDeleteCommand => new Command(async(sender) => await OnDeleteCommandAsync(sender));
+
+       
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -56,18 +60,49 @@ namespace Monitor
               await  NavigationService.NavigateToAsync<MonitorViewModel>(sender);
         }
 
-		public void OnUpdate(MonitorContainer alertContainer)
+        private async Task RefreshMonitorCommandAsync()
         {
-			AlertContainers = new ObservableCollection<MonitorModel>();
+            IsListViewRefreshing = true;
+            MonitorContainer alertContainer  = await _monitorService.GetMonitorsAsync();
+            OnUpdate(alertContainer);
+            IsListViewRefreshing = false;
+        } 
 
-			foreach(MonitorModel model in alertContainer.monitor)
+        private async Task OnDeleteCommandAsync(object sender)
+        {
+            var monitor  = (MonitorModel)sender;
+            MonitorContainers.Remove(monitor);
+            await _monitorService.DeleteMonitorAsync(monitor);
+        }
+
+		public void OnUpdate(MonitorContainer monitorContainer)
+        {
+            MonitorContainers = new ObservableCollection<MonitorModel>();
+
+			foreach(MonitorModel model in monitorContainer.monitor)
             { 
-                AlertContainers.Add(new MonitorModel{ 
+                MonitorContainers.Add(new MonitorModel{ 
                     Name = model.Name, 
 					Description = model.Description,
                     StatusCode = (model.StatusCode == "200") ? "success.png" : "error.png",
+                    Id = model.Id,
+                    UserId = model.UserId
 				});
 			}
+        }
+
+        bool isListViewRefreshing = false;
+        public bool IsListViewRefreshing
+        {
+            set
+            {
+                isListViewRefreshing = value;
+                RaisePropertyChanged(() => IsListViewRefreshing);
+            }
+            get
+            {
+                return isListViewRefreshing;
+            }
         }
 
         string name = "Gray";
@@ -112,17 +147,17 @@ namespace Monitor
             }
         }
 
-		ObservableCollection<MonitorModel> alertContainers;
-		public  ObservableCollection<MonitorModel> AlertContainers
+		ObservableCollection<MonitorModel> monitorContainers;
+		public  ObservableCollection<MonitorModel> MonitorContainers
         {
             set
             {
-                alertContainers = value;
-                RaisePropertyChanged(() => AlertContainers);
+                monitorContainers = value;
+                RaisePropertyChanged(() => MonitorContainers);
             }
             get
             {
-                return alertContainers;
+                return monitorContainers;
             }
         }
 

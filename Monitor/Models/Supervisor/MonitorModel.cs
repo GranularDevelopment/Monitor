@@ -5,6 +5,9 @@ namespace Monitor
 {
     public class MonitorModel 
 	{
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; } 
+
 		[JsonProperty(PropertyName = "name")]
         public string Name { get; set; } 
 	
@@ -23,8 +26,17 @@ namespace Monitor
 		[JsonProperty(PropertyName = "timestamp")]
         public DateTime TimeStamp { get; set; }
 
-		[JsonProperty(PropertyName = "on")]
-        public bool On{ get; set; }
+		//[JsonProperty(PropertyName = "all_alerts")]
+        //public bool Alerts{ get; set; }
+
+        [JsonProperty(PropertyName = "sms_alert")]
+        public bool SMSAlert{ get; set; }
+
+        [JsonProperty(PropertyName = "email_alert")]
+        public bool EmailAlert{ get; set; }
+
+        [JsonProperty(PropertyName = "push_notification_alert")]
+        public bool PushAlert{ get; set; }
 
 		[JsonProperty(PropertyName = "statuscode")]
         public string StatusCode{ get; set; }

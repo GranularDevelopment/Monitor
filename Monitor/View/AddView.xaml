@@ -6,7 +6,9 @@
              xmlns:converters="clr-namespace:Monitor.Converters;assembly=Monitor"
              xmlns:local="clr-namespace:Monitor.Renderers;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-             x:Class="Monitor.AddView">
+             x:Class="Monitor.AddView"
+             BackgroundImage="background.png"
+             >
 
     <ContentPage.Resources> 
     <ResourceDictionary>
@@ -43,14 +45,16 @@
 
             <converters:BooleanToObjectConverter.FalseObject>
                 <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-                <Setter Property="TextColor" Value="#F44336" />
+                <Setter Property="TextColor" Value="#bc0e07"/>
+                <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Text" Value="Enter a valid name" />
                 </Style>
             </converters:BooleanToObjectConverter.FalseObject>
         
             <converters:BooleanToObjectConverter.TrueObject>
                 <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-                <Setter Property="TextColor" Value="#4CAF50" />
+                <Setter Property="TextColor" Value="#a0ffb0" />
+                <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Text" Value="Your name looks good" />
                 </Style>
             </converters:BooleanToObjectConverter.TrueObject>
@@ -63,14 +67,16 @@
 
         <converters:BooleanToObjectConverter.FalseObject>
            <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-            <Setter Property="TextColor" Value="#F44336" />
+            <Setter Property="TextColor" Value="#bc0e07"/>
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Text" Value="Enter a valid URL" />
           </Style>
         </converters:BooleanToObjectConverter.FalseObject>
         
         <converters:BooleanToObjectConverter.TrueObject>
           <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-            <Setter Property="TextColor" Value="#4CAF50" />
+            <Setter Property="TextColor" Value="#a0ffb0" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Text" Value="Your URL looks good" />
           </Style>
         </converters:BooleanToObjectConverter.TrueObject>
@@ -145,7 +151,7 @@
                    />
 
 
-            <Entry 
+            <local:NoHelperEntry 
                    Grid.Row="4"
                    Grid.Column="1"
                    x:Name="URLEntry" 
@@ -155,7 +161,7 @@
                    <Entry.Behaviors>
                     <behaviors:URLValidatorBehavior x:Name="urlValidator"/>
                 </Entry.Behaviors>
-            </Entry>
+            </local:NoHelperEntry>
 
                 <Image Grid.Row="4" 
                    Grid.Column="2"
@@ -163,6 +169,8 @@
                    Style="{Binding Source={x:Reference urlValidator}, 
                                 Path=IsValid, 
                                 Converter={StaticResource boolToStyleImage}}"/>
+
+
 
              <Label 
                     Grid.Row="5" 
@@ -214,6 +222,7 @@
             </Slider>
 
             </Grid>
+
             <Button Style="{StaticResource submitButtonStyle}"
                     Text="[ Add Monitor ]"
                     Command="{Binding AddMonitorCommand}"

@@ -9,7 +9,9 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.7.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewModel\Server\EditServerViewModel.cs" />
@@ -54,6 +56,7 @@
     <Folder Include="Services\Supervisor\" />
     <Folder Include="Models\Supervisor\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="View\AddView.xaml.cs">
@@ -77,5 +80,14 @@
     <Compile Update="View\WebsiteView.xaml.cs">
       <DependentUpon>MonitorView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Localization\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Localization\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

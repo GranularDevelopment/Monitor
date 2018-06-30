@@ -146,17 +146,20 @@
     <ImageAsset Include="Assets.xcassets\error.imageset\error.png" />
     <ImageAsset Include="Assets.xcassets\success.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\success.imageset\success.png" />
+    <ImageAsset Include="Assets.xcassets\settings.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\settings.imageset\ic_action_settings.png" />
+    <ImageAsset Include="Assets.xcassets\logout.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\logout.imageset\ic_gosearch.png" />
+    <ImageAsset Include="Assets.xcassets\home.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\home.imageset\ic_action_home.png" />
+    <ImageAsset Include="Assets.xcassets\background.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\background.imageset\background.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>3.0.0.482510</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -169,5 +172,14 @@
     <Folder Include="Assets.xcassets\hamburger.imageset\" />
     <Folder Include="Assets.xcassets\error.imageset\" />
     <Folder Include="Assets.xcassets\success.imageset\" />
+    <Folder Include="Assets.xcassets\settings.imageset\" />
+    <Folder Include="Assets.xcassets\logout.imageset\" />
+    <Folder Include="Assets.xcassets\home.imageset\" />
+    <Folder Include="Assets.xcassets\background.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>3.1.0.583944</Version>
+    </PackageReference>
   </ItemGroup>
 </Project>

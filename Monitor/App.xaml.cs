@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Monitor
 {
@@ -44,6 +48,10 @@ namespace Monitor
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start("ios=9ee135fc-f20c-44c3-93ec-531f690ee0fe;" 
+                            + "uwp={Your UWP App secret here};" 
+                            + "android={Your Android App secret here}", 
+                            typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

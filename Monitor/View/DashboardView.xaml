@@ -9,7 +9,10 @@
             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
             x:Name="DashboardPage"
             Title="Dashboard"
-            x:Class="Monitor.DashboardView">
+            x:Class="Monitor.DashboardView"
+            BackgroundImage="background.png"
+            BackgroundColor="#33302E"
+             >
 
    <!-- Keep ContentPage.Resources outside of ContentPage.Content -->
     <ContentPage.Resources>
@@ -19,12 +22,16 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout>
+    <StackLayout >
     <ListView x:Name="listView"   
               HasUnevenRows="true" 
               SeparatorVisibility="None"  
-              ItemsSource="{Binding AlertContainers}"
+              ItemsSource="{Binding MonitorContainers}"
               SelectedItem="{Binding monitorSelected}"
+              IsPullToRefreshEnabled="true"
+              RefreshCommand="{Binding RefreshMonitorCommand }"
+              IsRefreshing ="{Binding IsListViewRefreshing}"
+              BackgroundColor="Transparent"
               >
               <ListView.Behaviors>
                                     <behaviors:EventToCommandBehavior
@@ -33,15 +40,27 @@
                                         Command="{Binding EditCommand}" />
                                 </ListView.Behaviors>
         <ListView.ItemTemplate>
-            <DataTemplate>
+            <DataTemplate >
                 <ViewCell>
-                        <Frame Padding="10" Margin="0,5,0,5" HeightRequest="150">
-                                <StackLayout HorizontalOptions="Center">
-                                    <Label Text="{Binding Name}" VerticalTextAlignment="Center" />
-                                    <Label Text="{Binding Description}" VerticalTextAlignment="Center" />
-                                    <Image Source="{Binding StatusCode}"
-                                           HeightRequest="20"/>
-                                </StackLayout>
+                 <ViewCell.ContextActions>
+            <MenuItem  Command="{Binding Path=BindingContext.OnDeleteCommand, Source={x:Reference DashboardPage}}" 
+                       CommandParameter="{Binding .}"
+                       Text="Delete" 
+                       IsDestructive="True" />
+         </ViewCell.ContextActions>
+         <Frame 
+                HasShadow="true"
+                Padding="10" 
+                Margin="0,5,0,5"
+                OutlineColor="White"
+                BackgroundColor="Transparent" >
+                <StackLayout  >
+                <StackLayout Orientation="Horizontal">
+                            <Label HorizontalOptions="StartAndExpand" Text="{Binding Name}" VerticalTextAlignment="Center" />
+                            <Image HorizontalOptions="End" Source="{Binding StatusCode}" HeightRequest="40" />
+                </StackLayout>
+                            <Label Text="{Binding Description}" VerticalTextAlignment="Center" />
+                        </StackLayout>
                         </Frame>
                 </ViewCell>
             </DataTemplate>
@@ -55,6 +74,5 @@
                     FontAttributes = "Bold" 
                     Command="{Binding AddCommand}"
                         />
-
     </StackLayout>
 </ContentPage>

@@ -5,13 +5,19 @@
                   xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
                   xmlns:local="clr-namespace:Monitor;assembly=Monitor"
                   viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+                  BackgroundImage="background.png"
+                  BackgroundColor="#33302E"
                   >
-    <MasterDetailPage.Master>
+    <MasterDetailPage.Master
+        BackgroundImage="background.png">
         <local:MasterView x:Name="MasterViewPage" />
     </MasterDetailPage.Master>
-    <MasterDetailPage.Detail>
+    <MasterDetailPage.Detail
+       BackgroundImage="background.png" >
          
-        <NavigationPage>
+        <NavigationPage
+            BackgroundImage="background.png"
+            BackgroundColor="#33302E" >
             <x:Arguments>
                 <local:DashboardView
                     x:Name="Dashboardview" 

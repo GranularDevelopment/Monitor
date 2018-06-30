@@ -19,51 +19,58 @@ namespace Monitor
         public override async Task InitializeAsync(object navigationData)
         {
             IsBusy = true;
-			await getStatus((MonitorModel)navigationData);
+			getStatus((MonitorModel)navigationData);
             IsBusy = false; 
         }
 
-		private async Task getStatus(MonitorModel navigationData)
+		private void getStatus(MonitorModel monitor)
         {
-			MonitorModel monitor = await _monitorService.GetMonitorAsync(new MonitorModel());
-
-            StatusCode =  monitor.StatusCode;
-            Description = monitor.Description;
-            On = monitor.On; 
+            try
+            {
+                URL = monitor.URL;
+                StatusCode =  monitor.StatusCode;
+                Description = monitor.Description;
+                SMS = monitor.SMSAlert; 
+                Email =  monitor.EmailAlert;
+                Push = monitor.PushAlert;
+            }
+            catch(Exception e)
+            {
+                
+            }
         }
 
-        public ICommand RestartWebsiteCommand => new Command(async(sender) => await restartWebsiteAsync(sender));
-        public ICommand GitCommand => new Command(async(sender) => await gitPullAndUpdateAsync(sender));
-        public ICommand StopWebsiteCommand => new Command(async(sender) => await stopWebsiteAsync(sender));
-        public ICommand AlertsCommand => new Command(async (sender)   => await AlertTapCommandAsync(sender));
+        public ICommand ApplyCommand => new Command(async() => await ApplyCommandAsync());
 
        
-        private async Task restartWebsiteAsync(object sender)
+        private async Task ApplyCommandAsync()
         {
-            await DialogService.ShowAlertAsync("Website Restarted","Restart","OK");
+            await DialogService.ShowAlertAsync("Your changes have been applied","","OK");
         }
-
-        private Task gitPullAndUpdateAsync(object sender)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Task stopWebsiteAsync(object sender)
-        {
-            throw new NotImplementedException();
-        }
-
 
         private async Task AlertTapCommandAsync(object sender)
         {
             MonitorModel monitor = new MonitorModel()
             {
-                On = on
             };
 
            MonitorModel editMonitor = await _monitorService.EditMonitorAsync(monitor);
             await DialogService.ShowAlertAsync("Successful","Save","OK");
 
+        }
+
+        string _url;
+        public string URL 
+        {
+            set
+            { 
+                _url = value;
+                RaisePropertyChanged(() => URL );             
+            }
+            get
+            {
+                return _url;
+            }
         }
 
 		string _statusCode;
@@ -94,19 +101,61 @@ namespace Monitor
 			}
 		}
 
-		bool on;
-		public bool On
-		{
-			set
+		//bool _alerts;
+		//public bool Alerts 
+		//{
+		//	set
+  //          { 
+  //              _alerts = value; 
+  //              RaisePropertyChanged(() => Alerts);
+		//	}
+		//	get
+		//	{
+		//		return _alerts;
+		//	}
+		//}
+
+        bool _sms;
+        public bool SMS 
+        {
+            set
             { 
-                on = value; 
-                RaisePropertyChanged(() => On);
-			}
-			get
-			{
-				return on;
-			}
-		}
+                _sms = value; 
+                RaisePropertyChanged(() => SMS);
+            }
+            get
+            {
+                return _sms;
+            }
+        }
+
+        bool _email;
+        public bool Email  
+        {
+            set
+            { 
+                _email = value; 
+                RaisePropertyChanged(() => Email);
+            }
+            get
+            {
+                return _email;
+            }
+        }
+
+        bool _push;
+        public bool Push 
+        {
+            set
+            { 
+                _push= value; 
+                RaisePropertyChanged(() => Push);
+            }
+            get
+            {
+                return _push;
+            }
+        }
 
         private bool _isBusy;
         public bool IsBusy

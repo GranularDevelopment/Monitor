@@ -6,12 +6,114 @@
              xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
              xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-             Title="Granular Website"
-             x:Class="Monitor.MonitorView">
+             Title="Monitor"
+             x:Class="Monitor.MonitorView"
+             BackgroundImage="background.png"
+             >
     <ContentPage.Resources>
         <ResourceDictionary>
             <common:InverseConverter x:Key="boolNegation" />
     </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0, 20, 0, 0" />
+        </OnPlatform>
+    </ContentPage.Padding>
+    <StackLayout> 
 
+    <Grid Padding="0,40,0,0">
+      <Grid.RowDefinitions>
+        <RowDefinition  />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition  Height="1"/>
+      
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="40" />
+      </Grid.ColumnDefinitions> 
+
+        <Label Grid.Row="0" 
+               Grid.Column="1" 
+               Text="{Binding URL}"/> 
+
+        <Label Grid.Row="1"
+                Grid.Column="1"
+                Text="Status Code"
+                />
+
+        <Label Grid.Row="1" 
+           Grid.Column="2"
+           Text="{Binding StatusCode}" />
+
+        <Label Grid.Row="2" 
+               Grid.Column="1"
+               Text="Description" />
+        <Label Grid.Row="2"
+                Grid.Column="2"
+                Text="{Binding Description}"/>
+
+        <Label Grid.Row="4" 
+               Grid.Column="1"
+               Text="Alerts" />
+<!--
+         <Switch
+            IsToggled="{Binding Alerts}"
+            HorizontalOptions="End"
+            Grid.Row="4"
+            Grid.Column="1"
+                 />-->
+
+        <BoxView Grid.Row="5"
+                 Grid.ColumnSpan="3"
+                 Color="Black"
+                 WidthRequest="1"
+                 />
+
+        <Label Grid.Row="6" 
+               Grid.Column="1"
+               Text="Text (SMS)" />
+
+         <Switch 
+         IsToggled="{Binding SMS}"
+                 Grid.Row="6"
+                 Grid.Column="1"
+                 HorizontalOptions="End"
+                 />
+
+         <Label Grid.Row="7" 
+               Grid.Column="1"
+               Text="Email" />
+
+         <Switch 
+         IsToggled="{Binding Email}"
+                Grid.Row="7"
+                 Grid.Column="1"
+                 HorizontalOptions="End"
+                 />
+
+        <Label Grid.Row="8" 
+               Grid.Column="1"
+               Text="Push Notification" />
+
+         <Switch 
+         IsToggled="{Binding Push}"
+                Grid.Row="8"
+                 Grid.Column="1"
+                 HorizontalOptions="End" />
+
+    </Grid>
+
+
+            <Button Style="{StaticResource submitButtonStyle}"
+                    Text="[ Apply ]"
+                    Command="{Binding ApplyCommand}"
+                        />
+    </StackLayout>
 </ContentPage>

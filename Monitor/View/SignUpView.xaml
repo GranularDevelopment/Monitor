@@ -6,7 +6,9 @@
              xmlns:converters="clr-namespace:Monitor.Converters; assembly=Monitor"
              xmlns:local="clr-namespace:Monitor.Renderers;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-             x:Class="Monitor.SignUpView">
+             x:Class="Monitor.SignUpView"
+             BackgroundImage="background.png"
+             >
 <ContentPage.Title>
         <OnPlatform
             x:TypeArguments="x:String"
@@ -47,14 +49,16 @@
 
         <converters:BooleanToObjectConverter.FalseObject>
            <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-            <Setter Property="TextColor" Value="#F44336" />
+            <Setter Property="TextColor" Value="#bc0e07"/>
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Text" Value="Enter a valid email" />
           </Style>
         </converters:BooleanToObjectConverter.FalseObject>
         
         <converters:BooleanToObjectConverter.TrueObject>
           <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-            <Setter Property="TextColor" Value="#4CAF50" />
+            <Setter Property="TextColor" Value="#a0ffb0" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Text" Value="Your email looks good" />
           </Style>
         </converters:BooleanToObjectConverter.TrueObject>
@@ -66,14 +70,16 @@
 
         <converters:BooleanToObjectConverter.FalseObject>
            <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-            <Setter Property="TextColor" Value="#F44336" />
+            <Setter Property="TextColor" Value="#bc0e07"/>
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Text" Value="Enter a valid password" />
           </Style>
         </converters:BooleanToObjectConverter.FalseObject>
         
         <converters:BooleanToObjectConverter.TrueObject>
           <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-            <Setter Property="TextColor" Value="#4CAF50" />
+            <Setter Property="TextColor" Value="#a0ffb0" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Text" Value="Your password looks good" />
           </Style>
         </converters:BooleanToObjectConverter.TrueObject>
