@@ -8,7 +8,6 @@ namespace Monitor
 	public class MonitorService: IMonitorService
     {
 		private readonly IRequests _request;
-		//private const string ApiUrlBase = "/api/v1/c/catalog";
 
         public MonitorService( IRequests request)
         {
@@ -17,16 +16,16 @@ namespace Monitor
 
         public async Task<MonitorModel> AddMonitorAsync(MonitorModel monitor)
         {
-			UriBuilder builder = new UriBuilder(Constants.URL_ADD_MONITOR);
+            UriBuilder builder = new UriBuilder(GlobalSetting.Instance.AddMonitor);
             string uri = builder.ToString();
-			 MonitorModel websiteContainer = await _request.PostAsync(uri, monitor);
+			MonitorModel monitorContainer = await _request.PostAsync(uri, monitor);
 
-            return websiteContainer; 
+            return monitorContainer; 
         }
 
 		public async Task<MonitorContainer> GetMonitorsAsync()
         {
-			UriBuilder builder = new UriBuilder(Constants.URL_GET_MONITORS);
+            UriBuilder builder = new UriBuilder($"{GlobalSetting.Instance.GetMonitors}/{Settings.UserName}");
             string uri = builder.ToString();
             MonitorContainer monitorContainer = await _request.GetAsync<MonitorContainer>(uri);
 
@@ -35,10 +34,8 @@ namespace Monitor
 
 		public async Task<MonitorModel> GetMonitorAsync(MonitorModel model)
         {
-            UriBuilder builder = new UriBuilder();
-            //builder.Path = $"{Constants.URL_GET_MONITOR}/{model.Id}/{model.UserId}";
-            string uri = $"{Constants.URL_GET_MONITOR}/{model.Id}/{model.UserId}";
-            //string uri = builder.ToString();
+            UriBuilder builder = new UriBuilder($"{GlobalSetting.Instance.GetMonitor}/{model.Id}/{model.UserId}");
+            string uri = builder.ToString();
             MonitorModel monitorModel= await _request.GetAsync<MonitorModel>(uri);
 
             return monitorModel; 
@@ -46,9 +43,7 @@ namespace Monitor
 
 		public async Task<MonitorModel> EditMonitorAsync(MonitorModel model)
         {
-            UriBuilder builder = new UriBuilder(Constants.URL_GET_MONITORS);
-			//UriBuilder builder = new UriBuilder(GlobalSetting.Instance.BaseEndpoint);
-            //builder.Path = $"{ApiUrlBase}/catalogtypes";
+            UriBuilder builder = new UriBuilder(GlobalSetting.Instance.EditMonitor);
             string uri = builder.ToString();
             MonitorModel monitorModel= await _request.PostAsync<MonitorModel>(uri,model);
 
@@ -58,9 +53,7 @@ namespace Monitor
         public async Task<MonitorModel> DeleteMonitorAsync(MonitorModel model)
         {
 
-            UriBuilder builder = new UriBuilder(Constants.URL_DELETE_MONITOR);
-            //UriBuilder builder = new UriBuilder(GlobalSetting.Instance.BaseEndpoint);
-            //builder.Path = $"{ApiUrlBase}/";
+            UriBuilder builder = new UriBuilder(GlobalSetting.Instance.DeleteMonitor);
             string uri = builder.ToString();
             MonitorModel monitorModel= await _request.PostAsync<MonitorModel>(uri,model);
 

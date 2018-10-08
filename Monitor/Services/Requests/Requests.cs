@@ -156,7 +156,7 @@ namespace Monitor.Services.Requests
                 if (response.StatusCode == HttpStatusCode.Forbidden || 
                 response.StatusCode == HttpStatusCode.Unauthorized)
                 { 
-                    throw new ServiceAuthenticationException(content);
+                    throw new ServiceAuthenticationException(response.StatusCode,content);
                     
                 }
 

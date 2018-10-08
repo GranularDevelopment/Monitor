@@ -9,11 +9,15 @@ namespace Monitor
     {
 		public CustomNavigationView(): base()
         {
+            BackgroundColor= Color.FromHex("#445963");
+            BarTextColor = Color.White;
             InitializeComponent();
         }
 
         public CustomNavigationView(Page root) : base(root)
         {
+            BarTextColor = Color.White;
+            BackgroundColor= Color.FromHex("#445963");
             InitializeComponent();
         }
     }

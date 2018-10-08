@@ -7,25 +7,41 @@
             <Style x:Key="submitButtonStyle" TargetType="Button">
                 <Setter Property="Margin" Value="80,20,80,20" />
                 <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="BackgroundColor" Value="#33302E" />
-                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="FontAttributes" Value="Bold" /> 
+                <Setter Property="BackgroundColor" Value="#05BDBD" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BorderRadius" Value="25" />
                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Thonburi-Light"/>
             </Style>
 
-            <Style x:Key="testButtonStyle" TargetType="Button">
-                <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="BorderRadius" Value="25" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="BackgroundColor" Value="#33302E" />
-                <Setter Property="HeightRequest" Value="50" />
-                <Setter Property="WidthRequest" Value="50" />
-                <Setter Property="TextColor" Value="White" />
+            <Style x:Key="labelSecondaryStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#696d6f" />
+                <Setter Property="FontFamily" Value="Thonburi-Light"/>
+            </Style>
+
+            <Style x:Key="labelPrimaryStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#3c4350" />
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Thonburi"/>
+            </Style>
+
+            <Style x:Key="buttonLinkStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#05BDBD" />
+                <Setter Property="FontFamily" Value="Thonburi-Light"/>
+            </Style>
+
+            <Style x:Key="footerStyle" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
             </Style>
 
             <Style x:Key="entryStyle" TargetType="Entry">
                 <Setter Property="Margin" Value="40,0,0,0" />
                 <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="BackgroundColor" Value="#f7f7f7"/>
             </Style>
 
             <Style x:Key="errorStyle" TargetType="Label">
@@ -36,7 +52,13 @@
                 <Setter Property="Margin" Value="0,0,0,40" />
             </Style>
 
- 
+            <Style x:Key="ValidationErrorLabelStyle"
+                   TargetType="{x:Type Label}">
+                   <Setter Property="TextColor"
+                           Value="#F44336" />
+                   <Setter Property="FontSize"
+                           Value="Micro" />
+            </Style>
             
         </ResourceDictionary>
     </Application.Resources>

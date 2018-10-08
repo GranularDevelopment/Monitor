@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Monitor.Exceptions;
+using Monitor.Localization;
 using Monitor.Model;
 using Monitor.Services.Identity;
 using Monitor.Services.RequestProvider;
@@ -14,7 +15,6 @@ namespace Monitor
     {
 
 		private ValidatableObject<string> _userName;
-        private ValidatableObject<string> _password;
 
         private readonly IIdentityService _userService;
 
@@ -22,7 +22,8 @@ namespace Monitor
         {
             _userService = userService;
             _userName = new ValidatableObject<string>();
-            _password = new ValidatableObject<string>();
+
+            AddValidations();
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -34,29 +35,41 @@ namespace Monitor
 
         private async Task ResetAsync()
         {
+            IsBusy = true;
+            await resetRequestAsync();
+            IsBusy = false;
+        }
+
+        async Task resetRequestAsync()
+        {
+            if(!Validate())
+                return;
+
             User user = new User{
                 UserName = _userName.Value,
             };
             try
             {
-                user = await _userService.ResetAsync<User>(user);
-                await DialogService.ShowAlertAsync("An email with instructions to reset your password has been sent to you. "
-				                                   ,user.UserName,"OK");
+                await _userService.ResetAsync<User>(user);
+                await DialogService.ShowAlertAsync(AppResources.ForgotPassword, 
+                                                   user.UserName,
+                                                   AppResources.OK);
                 Username = new ValidatableObject<string>();
                 await NavigationService.PopAsync();
             }
             catch (ServiceAuthenticationException e)
             {
-                await DialogService.ShowAlertAsync(e.Content, "Authentication Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
             catch (HttpRequestExceptionEx  e)
             {
-                await DialogService.ShowAlertAsync(e.HttpCode.ToString(), "HTTP Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
             catch (Exception e)
             {
-                await DialogService.ShowAlertAsync(e.ToString(), "Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
+            
         }
 
         public ValidatableObject<string> Username 
@@ -114,7 +127,7 @@ namespace Monitor
 
         private void AddValidations()
         {
-            _userName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A username is required." });
+            _userName.Validations.Add(new EmailRule<string> { ValidationMessage = AppResources.EmailRequired });
         }
     }
 }

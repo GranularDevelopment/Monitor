@@ -46,5 +46,209 @@ namespace Monitor.Localization {
                 resourceCulture = value;
             }
         }
+        
+        internal static string GenericError {
+            get {
+                return ResourceManager.GetString("GenericError", resourceCulture);
+            }
+        }
+        
+        internal static string WrongEmailOrPassword {
+            get {
+                return ResourceManager.GetString("WrongEmailOrPassword", resourceCulture);
+            }
+        }
+        
+        internal static string DuplicateEmail {
+            get {
+                return ResourceManager.GetString("DuplicateEmail", resourceCulture);
+            }
+        }
+        
+        internal static string MonitorAdded {
+            get {
+                return ResourceManager.GetString("MonitorAdded", resourceCulture);
+            }
+        }
+        
+        internal static string UserNameTaken {
+            get {
+                return ResourceManager.GetString("UserNameTaken", resourceCulture);
+            }
+        }
+        
+        internal static string UserNamePasswordIncorrect {
+            get {
+                return ResourceManager.GetString("UserNamePasswordIncorrect", resourceCulture);
+            }
+        }
+        
+        internal static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        internal static string SignUp {
+            get {
+                return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        internal static string ChangesApplied {
+            get {
+                return ResourceManager.GetString("ChangesApplied", resourceCulture);
+            }
+        }
+        
+        internal static string Successful {
+            get {
+                return ResourceManager.GetString("Successful", resourceCulture);
+            }
+        }
+        
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        internal static string Added {
+            get {
+                return ResourceManager.GetString("Added", resourceCulture);
+            }
+        }
+        
+        internal static string NameRequired {
+            get {
+                return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        internal static string URLRequired {
+            get {
+                return ResourceManager.GetString("URLRequired", resourceCulture);
+            }
+        }
+        
+        internal static string EmailRequired {
+            get {
+                return ResourceManager.GetString("EmailRequired", resourceCulture);
+            }
+        }
+        
+        internal static string PasswordRequired {
+            get {
+                return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        internal static string MonitorName {
+            get {
+                return ResourceManager.GetString("MonitorName", resourceCulture);
+            }
+        }
+        
+        internal static string Monitor {
+            get {
+                return ResourceManager.GetString("Monitor", resourceCulture);
+            }
+        }
+        
+        internal static string ByGranularDevelopment {
+            get {
+                return ResourceManager.GetString("ByGranularDevelopment", resourceCulture);
+            }
+        }
+        
+        internal static string ForgotPasswordBtn {
+            get {
+                return ResourceManager.GetString("ForgotPasswordBtn", resourceCulture);
+            }
+        }
+        
+        internal static string SignUpBtn {
+            get {
+                return ResourceManager.GetString("SignUpBtn", resourceCulture);
+            }
+        }
+        
+        internal static string SignInBtn {
+            get {
+                return ResourceManager.GetString("SignInBtn", resourceCulture);
+            }
+        }
+        
+        internal static string EmailPlaceholder {
+            get {
+                return ResourceManager.GetString("EmailPlaceholder", resourceCulture);
+            }
+        }
+        
+        internal static string PasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("PasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        internal static string SubscriptionTitle {
+            get {
+                return ResourceManager.GetString("SubscriptionTitle", resourceCulture);
+            }
+        }
+        
+        internal static string SubscriptionFree {
+            get {
+                return ResourceManager.GetString("SubscriptionFree", resourceCulture);
+            }
+        }
+        
+        internal static string Free {
+            get {
+                return ResourceManager.GetString("Free", resourceCulture);
+            }
+        }
+        
+        internal static string Premium {
+            get {
+                return ResourceManager.GetString("Premium", resourceCulture);
+            }
+        }
+        
+        internal static string Upgrade {
+            get {
+                return ResourceManager.GetString("Upgrade", resourceCulture);
+            }
+        }
+        
+        internal static string SubscriptionBasic {
+            get {
+                return ResourceManager.GetString("SubscriptionBasic", resourceCulture);
+            }
+        }
+        
+        internal static string SubscriptionPremium {
+            get {
+                return ResourceManager.GetString("SubscriptionPremium", resourceCulture);
+            }
+        }
     }
 }

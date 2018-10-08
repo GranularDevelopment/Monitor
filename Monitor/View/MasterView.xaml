@@ -3,18 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Monitor;assembly=Monitor"
              x:Class="Monitor.MasterView"
-             Padding="0,40,0,0"
+             BackgroundColor="#06bdbd"
              Icon="hamburger.png"
-             Title="Menu"
-             BackgroundImage="background.png"
-             >
+             Title="Menu" >
 
     <StackLayout>
         <ListView x:Name="listView"
-         SeparatorVisibility="None" >
+                  SeparatorVisibility="None"
+                  BackgroundColor="White"
+                  >
            <ListView.ItemsSource>
+
                 <x:Array Type="{x:Type local:MasterPageItem}">
-                    <local:MasterPageItem Title="Monitors" TargetType="{x:Type local:DashboardView}" IconSource="home"  />
+                    <local:MasterPageItem  Title="Monitors" TargetType="{x:Type local:DashboardView}" IconSource="home" />
                     <local:MasterPageItem Title="Settings" TargetType="{x:Type local:SettingsView}" IconSource="settings"/>
                     <local:MasterPageItem Title="Logout" TargetType="{x:Type  local:LoginView}"  IconSource="logout" />
                 </x:Array>
@@ -28,7 +29,9 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding IconSource}" />
-                            <Label Grid.Column="1" Text="{Binding Title}" />
+                            <Label Grid.Column="1" 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   Text="{Binding Title}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

@@ -5,7 +5,7 @@ namespace Monitor.Exceptions
 {
     public class ServiceAuthenticationException : Exception 
     {
-        private readonly IDialogService DialogService;
+        public System.Net.HttpStatusCode HttpCode { get; }
 
         public string Content { get; }
 
@@ -13,9 +13,10 @@ namespace Monitor.Exceptions
         {
         }
 
-        public ServiceAuthenticationException(string content)
+        public ServiceAuthenticationException(System.Net.HttpStatusCode code, string content)
         {
             Content = content;
+            HttpCode = code;
         }
     }
 }

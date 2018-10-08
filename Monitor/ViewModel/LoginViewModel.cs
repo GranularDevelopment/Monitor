@@ -9,6 +9,10 @@ using Monitor.Model;
 using Monitor.Exceptions;
 using Monitor.Services.RequestProvider;
 using Monitor.Validation;
+using Monitor.Helpers;
+using Monitor.Localization;
+using Monitor.Enums;
+using System.Net;
 
 namespace Monitor
 {
@@ -29,8 +33,16 @@ namespace Monitor
 
 		}
 
+        public LoginViewModel()
+        {
+        }
+
         public override Task InitializeAsync(object navigationData)
         {
+            if (navigationData != null){
+                User user = navigationData as User;
+                Username.Value = user.UserName; 
+            }
             return base.InitializeAsync(navigationData);
         }
 
@@ -43,9 +55,7 @@ namespace Monitor
         private async Task SignInAsync()
         {
             IsBusy = true;
-
             await LoginAndGetTokenAsync();
-
             IsBusy = false;
         }
 
@@ -71,22 +81,25 @@ namespace Monitor
                 {
                     Settings.AuthAccessToken = user.Token;
 					Settings.UserId = user.UserId;
-					Settings.UserName = user.UserName;
+					Settings.UserName = _userName.Value;
+                    Settings.AccountType  = user.AccountType;
 					await NavigationService.NavigateToAsync<MasterDetailViewModel>();
                     await NavigationService.RemoveLastFromBackStackAsync();
                 }
             }
             catch (ServiceAuthenticationException e)
             {
-                await DialogService.ShowAlertAsync(e.Content, "Authentication Error", "OK");
+                if(e.HttpCode == HttpStatusCode.Unauthorized){
+                    await DialogService.ShowAlertAsync(AppResources.WrongEmailOrPassword, AppResources.Error, AppResources.OK);
+                }
             }
             catch (HttpRequestExceptionEx  e)
             {
-                await DialogService.ShowAlertAsync(e.HttpCode.ToString(), "HTTP Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
             catch (Exception e)
             {
-                await DialogService.ShowAlertAsync(e.ToString(), "Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
         }
         
@@ -144,6 +157,7 @@ namespace Monitor
                 RaisePropertyChanged(() => IsBusy);
             }
         }
+
         private bool Validate()
 		{
 			bool isValidUser = ValidateUserName();
@@ -164,8 +178,8 @@ namespace Monitor
 
 		private void addValidations()
 		{
-			_userName.Validations.Add(new EmailRule<string> { ValidationMessage = "An email-username is required." });
-			_password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A password is required." });
+            _userName.Validations.Add(new EmailRule<string> { ValidationMessage = AppResources.EmailRequired });
+			_password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = AppResources.PasswordRequired });
 		}
 	}
 }

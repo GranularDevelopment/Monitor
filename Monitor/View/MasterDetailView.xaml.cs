@@ -10,7 +10,6 @@ namespace Monitor
         public MasterDetailView()
         {
             InitializeComponent();
-
 			MasterViewPage.ListView.ItemSelected += OnItemSelected;
         }
 
@@ -29,7 +28,7 @@ namespace Monitor
 				var page = (Page)Activator.CreateInstance(item.TargetType);
 				if (page is LoginView)
                 {
-                    Settings.AuthAccessToken =string.Empty;
+                    Settings.AuthAccessToken = string.Empty;
 
 					await Navigation.PopToRootAsync();
                     await ((page.BindingContext as ViewModelBase)).InitializeAsync(null);
@@ -38,9 +37,14 @@ namespace Monitor
 				else
 				{
 				    await ((page.BindingContext as ViewModelBase)).InitializeAsync(null);
-                    Detail =  new CustomNavigationView(page);
+                    CustomNavigationView navigationPage = new CustomNavigationView(page); 
+
+                    navigationPage.BarBackgroundColor = Color.FromHex("#191f28");
+                    navigationPage.BarTextColor = Color.FromHex("#ffffff");
+                    Detail =  navigationPage;
                     MasterViewPage.ListView.SelectedItem = null;
                     IsPresented = false;
+
 				}
             }
         }

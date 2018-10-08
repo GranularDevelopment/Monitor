@@ -9,10 +9,8 @@
             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
             x:Name="DashboardPage"
             Title="Dashboard"
-            x:Class="Monitor.DashboardView"
-            BackgroundImage="background.png"
-            BackgroundColor="#33302E"
-             >
+            BackgroundColor="White"
+            x:Class="Monitor.DashboardView" >
 
    <!-- Keep ContentPage.Resources outside of ContentPage.Content -->
     <ContentPage.Resources>
@@ -22,16 +20,15 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout >
+    <StackLayout BackgroundColor="White">
     <ListView x:Name="listView"   
               HasUnevenRows="true" 
-              SeparatorVisibility="None"  
+              SeparatorVisibility="None" 
               ItemsSource="{Binding MonitorContainers}"
               SelectedItem="{Binding monitorSelected}"
               IsPullToRefreshEnabled="true"
               RefreshCommand="{Binding RefreshMonitorCommand }"
               IsRefreshing ="{Binding IsListViewRefreshing}"
-              BackgroundColor="Transparent"
               >
               <ListView.Behaviors>
                                     <behaviors:EventToCommandBehavior
@@ -49,14 +46,30 @@
                        IsDestructive="True" />
          </ViewCell.ContextActions>
          <Frame 
-                HasShadow="true"
-                Padding="10" 
-                Margin="0,5,0,5"
-                OutlineColor="White"
-                BackgroundColor="Transparent" >
-                <StackLayout  >
+                HasShadow="false"
+                BorderColor="#3c4350"
+                HeightRequest="100"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="#White" >
+
+                <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                            <Label HorizontalOptions="StartAndExpand" Text="{Binding Name}" VerticalTextAlignment="Center" />
+                            <Label 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   HorizontalOptions="StartAndExpand" 
+                                   Text="{Binding Name}" 
+                                   VerticalTextAlignment="Start" />
+                            <Label 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   HorizontalOptions="StartAndExpand" 
+                                   Text="{Binding URL}" 
+                                   VerticalTextAlignment="Center" />
+                            <Label 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   HorizontalOptions="StartAndExpand" 
+                                   Text="{Binding Description}" 
+                                   VerticalTextAlignment="Center" />
+
                             <Image HorizontalOptions="End" Source="{Binding StatusCode}" HeightRequest="40" />
                 </StackLayout>
                             <Label Text="{Binding Description}" VerticalTextAlignment="Center" />
@@ -67,12 +80,12 @@
         </ListView.ItemTemplate>
     </ListView>
 
+    <StackLayout>
       <Button Margin="80,20,80,20" 
                     Text="[ Add Monitor ]"
-                    FontSize="Medium"
                     Style="{StaticResource submitButtonStyle}" 
-                    FontAttributes = "Bold" 
                     Command="{Binding AddCommand}"
                         />
+    </StackLayout>
     </StackLayout>
 </ContentPage>

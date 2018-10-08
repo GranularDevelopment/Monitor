@@ -18,7 +18,7 @@ namespace Monitor.Validation
 
             var str = value as string;
 
-            return !string.IsNullOrWhiteSpace(str);
+            return !string.IsNullOrWhiteSpace(str) && ! string.IsNullOrEmpty(str);
         }
     }
 }

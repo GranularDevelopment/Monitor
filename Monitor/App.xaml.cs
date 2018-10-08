@@ -30,12 +30,12 @@ namespace Monitor
             if(Settings.UseMocks)
             {
                 ViewModelLocator.RegisterDependencies(true);
-                Constants.UseMockServices(true);
+                GlobalSetting.Instance.Mock = true;
             }
             else
             {
                 ViewModelLocator.RegisterDependencies(false);
-                Constants.UseMockServices(false);
+                GlobalSetting.Instance.Mock = false;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Monitor
             // Handle when your app starts
             AppCenter.Start("ios=9ee135fc-f20c-44c3-93ec-531f690ee0fe;" 
                             + "uwp={Your UWP App secret here};" 
-                            + "android={Your Android App secret here}", 
+                            +"android=92098ef1-a8a3-4e15-8202-d4b0749eb014;",
                             typeof(Analytics), typeof(Crashes));
         }
 

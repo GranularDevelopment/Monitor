@@ -4,10 +4,12 @@
              xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
              xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
              xmlns:converters="clr-namespace:Monitor.Converters; assembly=Monitor"
+             xmlns:i18n="clr-namespace:Monitor.Helpers; assembly=Monitor"
              xmlns:local="clr-namespace:Monitor.Renderers;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
              x:Class="Monitor.LoginView"
-             BackgroundImage="background.png">
+             BackgroundColor="White "
+             >
 
      <ContentPage.Title>
         <OnPlatform
@@ -17,77 +19,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:InverseConverter x:Key="boolNegation" />
-
-        <converters:BooleanToObjectConverter x:Key="boolToStyleImage"
-                                              x:TypeArguments="Style">
-<!--
-            <converters:BooleanToObjectConverter.FalseObject>
-               <Style TargetType="Image">
-                <Setter Property="HeightRequest" Value="20" />
-                <Setter Property="Source" Value="error.png" />
-               </Style>
-            </converters:BooleanToObjectConverter.FalseObject>-->
-
-            <converters:BooleanToObjectConverter.TrueObject>
-                <Style TargetType="Image">
-                 <Setter Property="HeightRequest" Value="20" />
-                 <Setter Property="Source" Value="success.png" />
-                </Style>
-            </converters:BooleanToObjectConverter.TrueObject>
-
-        </converters:BooleanToObjectConverter>
-
-            <Style x:Key="baseStyle" TargetType="Label">
-                <Setter Property="XAlign" Value="Start" />
-                <Setter Property="YAlign" Value="Center" />
-                <Setter Property="FontSize" Value="Micro" />
-                <Setter Property="FontAttributes" Value="Italic" />
-            </Style>
-            
-        <converters:BooleanToObjectConverter x:Key="boolToStyleEmail"
-                                           x:TypeArguments="Style">
-
-            <converters:BooleanToObjectConverter.FalseObject>
-                <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-                <Setter Property="TextColor" Value="#bc0e07"/>
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Text" Value="Enter a valid email" />
-                </Style>
-            </converters:BooleanToObjectConverter.FalseObject>
-        
-            <converters:BooleanToObjectConverter.TrueObject>
-                <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-                <Setter Property="TextColor" Value="#a0ffb0" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Text" Value="Your email looks good" />
-                </Style>
-            </converters:BooleanToObjectConverter.TrueObject>
-
-        </converters:BooleanToObjectConverter>
-
-
-        <converters:BooleanToObjectConverter x:Key="boolToStylePassword"
-                                           x:TypeArguments="Style">
-
-        <converters:BooleanToObjectConverter.FalseObject>
-           <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-                <Setter Property="TextColor" Value="#bc0e07"/>
-                <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Text" Value="Enter a valid password" />
-          </Style>
-        </converters:BooleanToObjectConverter.FalseObject>
-        
-        <converters:BooleanToObjectConverter.TrueObject>
-          <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
-           <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="TextColor" Value="#a0ffb0" />
-            <Setter Property="Text" Value="Your password looks good" />
-          </Style>
-        </converters:BooleanToObjectConverter.TrueObject>
-
-        </converters:BooleanToObjectConverter>
-            
-            
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -99,14 +31,13 @@
     <ScrollView>
         <StackLayout > 
 
-
-            <Label Text="Monitor"
-                   FontSize="Large" 
+            <Label Text="{i18n:Translate Monitor}"
+                   Style="{StaticResource labelPrimaryStyle}"
                    HorizontalOptions="Center"
-                   FontAttributes="Bold"
                    Margin="0,0,0,20"/>
 
-            <Label Text="by GranularDevelopment"
+            <Label Text="{i18n:Translate ByGranularDevelopment}"
+                   Style="{StaticResource labelSecondaryStyle}"
                    FontSize="Small" 
                    HorizontalOptions="Center"
                    FontAttributes="Bold"
@@ -135,65 +66,51 @@
             Grid.Column="1"
             Style="{StaticResource entryStyle}"
             x:Name="usernameEntry"
-            Placeholder="Email"
+            Placeholder="{i18n:Translate EmailPlaceholder}" 
             Text="{Binding Username.Value, Mode=TwoWay}" >
-                <Entry.Behaviors>
-                    <behaviors:EmailValidatorBehavior x:Name="emailValidator"/>
-                </Entry.Behaviors>
         </local:NoHelperEntry>
 
-            <Image Grid.Row="0" 
-                   Grid.Column="2"
-                   x:Name="emailSuccessErrorImage"
-                   Style="{Binding Source={x:Reference emailValidator}, 
-                                Path=IsValid, 
-                                Converter={StaticResource boolToStyleImage}}"/>
+        <Label 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            HorizontalOptions="Center" 
+            Text="{Binding Username.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+            Style="{StaticResource ValidationErrorLabelStyle}" />
 
-            <Label 
-                    Grid.Row="1" 
-                    Grid.Column="1" 
-                    HorizontalOptions="Center" 
-                    Style="{Binding Source={x:Reference emailValidator}, 
-                                Path=IsValid,
-                                Converter={StaticResource boolToStyleEmail}}" />
-
-            <Entry 
-                   Grid.Row="2"
-                   Grid.Column="1"
-                   x:Name="passwordEntry" 
-                   Style="{StaticResource entryStyle}"
-                   IsPassword="true" 
-                   Placeholder="Password" 
-                   Text="{Binding Password.Value, Mode=TwoWay}">
-                   <Entry.Behaviors>
-                    <behaviors:PasswordValidatorBehavior x:Name="minValidator"/>
-                </Entry.Behaviors>
+        <Entry 
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="passwordEntry" 
+            Style="{StaticResource entryStyle}"
+            IsPassword="true" 
+            Placeholder="{i18n:Translate PasswordPlaceholder}" 
+            Text="{Binding Password.Value, Mode=TwoWay}">
             </Entry>
 
-                <Image Grid.Row="2" 
-                   Grid.Column="2"
-                   x:Name="passwordSuccessErrorImage"
-                   Style="{Binding Source={x:Reference minValidator}, 
-                                Path=IsValid, 
-                                Converter={StaticResource boolToStyleImage}}"/>
+        <Label 
+            Grid.Row="3" 
+            Grid.Column="1" 
+            HorizontalOptions="Center" 
+            Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}"
+            Style="{StaticResource ValidationErrorLabelStyle}" />
 
-             <Label 
-                    Grid.Row="3" 
-                    Grid.Column="1" 
-                    HorizontalOptions="Center" 
-                    Style="{Binding Source={x:Reference minValidator}, 
-                                Path=IsValid,
-                                Converter={StaticResource boolToStylePassword}}" />
+        </Grid>
+            
 
-              </Grid>
-            <StackLayout>
-            <Button Style="{StaticResource submitButtonStyle}" 
-                    Text="[ Sign In ]"
+
+        <StackLayout VerticalOptions="EndAndExpand" >
+
+             <ActivityIndicator 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}" />
+
+                <Button Style="{StaticResource submitButtonStyle}" 
+                    Text="{i18n:Translate SignInBtn}"
                     Command="{Binding SignInCommand}"
                         />
-
-            </StackLayout>
-            <StackLayout
+                <StackLayout
                 Margin="20,0,20,0"
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand"
@@ -201,16 +118,19 @@
 
                 <Button 
                     HorizontalOptions="StartAndExpand"
-                    Text="Forgot Password"
+                    Style="{StaticResource buttonLinkStyle}"
+                    Text="{i18n:Translate ForgotPasswordBtn}"
                     Command="{Binding ForgotPasswordCommand}"
                         />
 
                 <Button 
+                    Style="{StaticResource buttonLinkStyle}"
                     HorizontalOptions="EndAndExpand"
-                    Text="Sign up"
+                    Text="{i18n:Translate SignUpBtn}"
                     Command="{Binding SignUpCommand}"
                         />
 
+            </StackLayout>
             </StackLayout>
         </StackLayout>
 

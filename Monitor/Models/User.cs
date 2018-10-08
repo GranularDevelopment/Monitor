@@ -5,6 +5,7 @@ namespace Monitor.Model
 {
 	public class User 
 	{
+        [JsonProperty(PropertyName = "user_id")]
 		public int UserId { get; set; } 
 
 		[JsonProperty(PropertyName = "username")]
@@ -21,5 +22,8 @@ namespace Monitor.Model
 
 		[JsonProperty(PropertyName = "token")]
 		public string Token { get; set; }
+
+        [JsonProperty(PropertyName = "account_id")]
+        public int AccountType { get; set; }
 	}
 }

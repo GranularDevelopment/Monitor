@@ -9,5 +9,7 @@ namespace Monitor.Services.Identity
         Task<User> LoginAsync<User>(string username, string password);
         Task<User> SignUpAsync<User>(User model);
 		Task<User> ResetAsync<User>(User model);
+        Task<User> UpgradeAccountAsync<User>(User model);
+        Task<User> UserInfoAsync<User>();
     }
 }

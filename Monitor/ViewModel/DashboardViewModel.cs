@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Monitor.Services.Dashboard;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Monitor.Exceptions;
 using Monitor.Services.RequestProvider;
 using System.Collections.ObjectModel;
 using Monitor.Supervisor;
+using Monitor.Localization;
+using Monitor.Enums;
 
 namespace Monitor
 {
@@ -38,21 +39,32 @@ namespace Monitor
             }
             catch (ServiceAuthenticationException e)
             {
-                await DialogService.ShowAlertAsync(e.Content, "Authentication Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
             catch (HttpRequestExceptionEx  e)
             {
-                await DialogService.ShowAlertAsync(e.HttpCode.ToString(), "HTTP Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
             catch (Exception e)
             {
-                await DialogService.ShowAlertAsync(e.ToString(), "Error", "OK");
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
         }
 
         private async Task AddCommandAsync()
         {
-            await NavigationService.NavigateToAsync<AddViewModel>();
+            if( Settings.AccountType == (int)AccountType.FREE && MonitorContainers?.Count == 0){
+                await NavigationService.NavigateToAsync<AddViewModel>();
+            }
+            else if( Settings.AccountType == (int)AccountType.BASIC && MonitorContainers?.Count < 10){
+                await NavigationService.NavigateToAsync<AddViewModel>();
+            }
+            else if( Settings.AccountType == (int)AccountType.PREMIUM && MonitorContainers?.Count < 50){
+                await NavigationService.NavigateToAsync<AddViewModel>();
+            }
+            else{
+                await DialogService.ShowAlertAsync("No monitors available","", AppResources.OK);
+            }
         }
 
         private async Task EditCommandAsync(object sender)
@@ -62,19 +74,53 @@ namespace Monitor
 
         private async Task RefreshMonitorCommandAsync()
         {
-            IsListViewRefreshing = true;
-            MonitorContainer alertContainer  = await _monitorService.GetMonitorsAsync();
-            OnUpdate(alertContainer);
-            IsListViewRefreshing = false;
+            try
+            {
+                IsListViewRefreshing = true;
+                MonitorContainer alertContainer  = await _monitorService.GetMonitorsAsync();
+                OnUpdate(alertContainer);
+            } 
+            catch (ServiceAuthenticationException e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+            catch (HttpRequestExceptionEx  e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+            catch (Exception e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }finally{
+                IsListViewRefreshing = false;
+
+            }
         } 
 
         private async Task OnDeleteCommandAsync(object sender)
         {
-            var monitor  = (MonitorModel)sender;
-            MonitorContainers.Remove(monitor);
-            await _monitorService.DeleteMonitorAsync(monitor);
-        }
+            try
+            {
+                var monitor  = (MonitorModel)sender;
+                MonitorContainers.Remove(monitor);
+                await _monitorService.DeleteMonitorAsync(monitor);
 
+            }
+            catch (ServiceAuthenticationException e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+            catch (HttpRequestExceptionEx  e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+            catch (Exception e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+
+        }
+        
 		public void OnUpdate(MonitorContainer monitorContainer)
         {
             MonitorContainers = new ObservableCollection<MonitorModel>();
@@ -86,7 +132,12 @@ namespace Monitor
 					Description = model.Description,
                     StatusCode = (model.StatusCode == "200") ? "success.png" : "error.png",
                     Id = model.Id,
-                    UserId = model.UserId
+                    UserId = model.UserId,
+                    URL = model.URL,
+                    Interval = model.Interval,
+                    EmailAlert = model.EmailAlert,
+                    PushAlert = model.PushAlert,
+                    SMSAlert = model.SMSAlert
 				});
 			}
         }
@@ -105,7 +156,7 @@ namespace Monitor
             }
         }
 
-        string name = "Gray";
+        string name = "";
         public string Name 
         {
             set
@@ -120,7 +171,7 @@ namespace Monitor
             }
         }
 
-        string statusCode = "Gray";
+        string statusCode = "";
         public string StatusCode 
         {
             set
@@ -134,7 +185,7 @@ namespace Monitor
             }
         }
 
-        string description= "Gray";
+        string description= "";
         public string Description {
             set
             {
@@ -147,6 +198,20 @@ namespace Monitor
             }
         }
 
+        string url= "";
+        public string URL{
+            set
+            {
+                url = value;
+                RaisePropertyChanged(() => URL);
+            }
+            get
+            {
+                return url;
+            }
+        }
+
+
 		ObservableCollection<MonitorModel> monitorContainers;
 		public  ObservableCollection<MonitorModel> MonitorContainers
         {
@@ -158,20 +223,6 @@ namespace Monitor
             get
             {
                 return monitorContainers;
-            }
-        }
-
-        string serverStatus = "Gray";
-        public string ServerStatus
-        {
-            set
-            {
-                serverStatus = value;
-                RaisePropertyChanged(() => ServerStatus);
-            }
-            get
-            {
-                return serverStatus;
             }
         }
 

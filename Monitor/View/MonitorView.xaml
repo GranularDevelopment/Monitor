@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Monitor;assembly=Monitor"
              xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+             xmlns:converters="clr-namespace:Monitor.Converters;assembly=Monitor"
              xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
              xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
              Title="Monitor"
              x:Class="Monitor.MonitorView"
-             BackgroundImage="background.png"
              >
     <ContentPage.Resources>
         <ResourceDictionary>
             <common:InverseConverter x:Key="boolNegation" />
+            <converters:ValueChangedEventArgsConverter x:Key="ValueChangedEventArgsConverter" />
     </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Padding>
@@ -39,36 +40,75 @@
         <ColumnDefinition Width="40" />
       </Grid.ColumnDefinitions> 
 
-        <Label Grid.Row="0" 
-               Grid.Column="1" 
+        <Entry Grid.Row="0" 
+               Grid.ColumnSpan="3" 
+               HorizontalOptions="CenterAndExpand"
+               Style="{StaticResource labelPrimaryStyle}"
                Text="{Binding URL}"/> 
 
         <Label Grid.Row="1"
-                Grid.Column="1"
-                Text="Status Code"
+               Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Status Code"
                 />
 
-        <Label Grid.Row="1" 
-           Grid.Column="2"
-           Text="{Binding StatusCode}" />
+        <Image Grid.Row="1" 
+               Grid.Column="2"
+               HorizontalOptions="End" 
+               Source="{Binding StatusCode}"/>
 
         <Label Grid.Row="2" 
                Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
                Text="Description" />
-        <Label Grid.Row="2"
-                Grid.Column="2"
-                Text="{Binding Description}"/>
 
-        <Label Grid.Row="4" 
-               Grid.Column="1"
-               Text="Alerts" />
+        <Label Grid.Row="2"
+               Grid.Column="2"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="{Binding Description}"/>
+
 <!--
-         <Switch
-            IsToggled="{Binding Alerts}"
-            HorizontalOptions="End"
-            Grid.Row="4"
-            Grid.Column="1"
-                 />-->
+        <Label 
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource labelSecondaryStyle}"
+                Text="Interval (minutes):"
+                HorizontalOptions="Start"
+                Margin="40,0,40,0"/>-->
+
+      <!--  <Label 
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource labelSecondaryStyle}"
+                Text="{Binding Source={x:Reference interval},
+                Path=Value,
+                StringFormat='{0:F0}'}"
+                HorizontalOptions="End"
+                />
+
+            <Slider
+                Grid.Row="4"
+                Grid.ColumnSpan="3"
+                x:Name="interval"
+                Margin="40,0,40,0"
+                Maximum="60"
+                Minimum="1"  
+                Value="{Binding Interval, Mode=TwoWay}" >
+                
+                <Slider.Behaviors>
+                    <OnPlatform x:TypeArguments="Behavior">
+                        <On Platform="iOS, Android">
+                            <On.Value>
+                                    <behaviors:EventToCommandBehavior 
+                                        EventName="ValueChanged"
+                                        EventArgsConverter="{StaticResource ValueChangedEventArgsConverter}"
+                                        Command="{Binding ValueChangedCommand}"
+                                    />
+                                </On.Value>
+                            </On>
+                        </OnPlatform>
+                </Slider.Behaviors>
+            </Slider>-->
 
         <BoxView Grid.Row="5"
                  Grid.ColumnSpan="3"
@@ -78,17 +118,25 @@
 
         <Label Grid.Row="6" 
                Grid.Column="1"
-               Text="Text (SMS)" />
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Alerts" />
 
-         <Switch 
+
+        <!--<Label Grid.Row="7" 
+               Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Text (SMS)" />-->
+
+         <!--<Switch 
          IsToggled="{Binding SMS}"
-                 Grid.Row="6"
+                 Grid.Row="7"
                  Grid.Column="1"
                  HorizontalOptions="End"
                  />
-
+-->
          <Label Grid.Row="7" 
                Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
                Text="Email" />
 
          <Switch 
@@ -100,6 +148,7 @@
 
         <Label Grid.Row="8" 
                Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
                Text="Push Notification" />
 
          <Switch 
@@ -109,11 +158,11 @@
                  HorizontalOptions="End" />
 
     </Grid>
-
-
+        <StackLayout Style="{StaticResource footerStyle}" >
             <Button Style="{StaticResource submitButtonStyle}"
                     Text="[ Apply ]"
                     Command="{Binding ApplyCommand}"
                         />
+        </StackLayout>
     </StackLayout>
 </ContentPage>

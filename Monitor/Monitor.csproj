@@ -9,9 +9,10 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.7.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.7.0" />
+    <PackageReference Include="Plugin.InAppBilling" Version="2.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.9.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.9.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewModel\Server\EditServerViewModel.cs" />
@@ -28,6 +29,8 @@
     <Compile Remove="Effects\EntryLineColorEffect.cs" />
     <Compile Remove="Models\Website\WebsiteContainer.cs" />
     <Compile Remove="API\Website\IWebsiteService.cs" />
+    <Compile Remove="Services\Dashboard\DashboardService.cs" />
+    <Compile Remove="Models\Alert\AlertContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="View\ServerView.xaml" />
@@ -57,6 +60,7 @@
     <Folder Include="Models\Supervisor\" />
     <Folder Include="Helpers\" />
     <Folder Include="Localization\" />
+    <Folder Include="Services\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="View\AddView.xaml.cs">
@@ -88,6 +92,10 @@
     <EmbeddedResource Update="Localization\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -27,7 +27,7 @@ namespace Monitor.Behaviors
     
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
-			IsValid = !string.IsNullOrEmpty(e.NewTextValue);
+            IsValid = !string.IsNullOrEmpty(e.NewTextValue) && !string.IsNullOrWhiteSpace(e.NewTextValue);
             ((Entry)sender).TextColor = IsValid ? Color.Default : Color.Red;
         }
     

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace Monitor
 {
-    public partial class DashboardView : ContentPage
+    public partial class DashboardView: ContentPage
     {
         public DashboardView()
         {
@@ -16,6 +16,7 @@ namespace Monitor
         {
 
             var vm = BindingContext as DashboardViewModel;
+
             base.OnAppearing();
         }
 

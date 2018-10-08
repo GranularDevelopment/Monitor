@@ -8,6 +8,8 @@ namespace Monitor
         public string IconSource { get; set; }
 
         public Type TargetType { get; set; }
+
+        public string FontColor { get; set; }
     }
 
 }

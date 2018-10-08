@@ -4,12 +4,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Monitor.Model;
 using Monitor.Supervisor;
+using Monitor.Services.RequestProvider;
+using Monitor.Exceptions;
+using Monitor.Localization;
 
 namespace Monitor
 {
 	public class MonitorViewModel: ViewModelBase 
 	{
         private readonly IMonitorService _monitorService;
+        private MonitorModel _model;
 
         public MonitorViewModel( IMonitorService monitorService)
 		{
@@ -25,19 +29,15 @@ namespace Monitor
 
 		private void getStatus(MonitorModel monitor)
         {
-            try
-            {
-                URL = monitor.URL;
-                StatusCode =  monitor.StatusCode;
-                Description = monitor.Description;
-                SMS = monitor.SMSAlert; 
-                Email =  monitor.EmailAlert;
-                Push = monitor.PushAlert;
-            }
-            catch(Exception e)
-            {
-                
-            }
+            _model = monitor;
+
+            URL = monitor.URL;
+            StatusCode =  monitor.StatusCode;
+            Description = monitor.Description;
+            SMS = monitor.SMSAlert; 
+            Email =  monitor.EmailAlert;
+            Push = monitor.PushAlert;
+            Interval = monitor.Interval;
         }
 
         public ICommand ApplyCommand => new Command(async() => await ApplyCommandAsync());
@@ -45,7 +45,33 @@ namespace Monitor
        
         private async Task ApplyCommandAsync()
         {
-            await DialogService.ShowAlertAsync("Your changes have been applied","","OK");
+            MonitorModel model = new MonitorModel{
+                Id = _model.Id,
+                UserId = Settings.UserId,
+                URL = URL,
+                SMSAlert = SMS,
+                PushAlert =  Push,
+                Interval = Interval
+            };
+
+            try
+            {
+                await _monitorService.EditMonitorAsync(model);
+                await DialogService.ShowAlertAsync(AppResources.ChangesApplied,"",AppResources.OK);
+                await NavigationService.PopAsync();
+            } 
+            catch (ServiceAuthenticationException e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+            catch (HttpRequestExceptionEx  e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
+            catch (Exception e)
+            {
+                await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
+            }
         }
 
         private async Task AlertTapCommandAsync(object sender)
@@ -54,8 +80,8 @@ namespace Monitor
             {
             };
 
-           MonitorModel editMonitor = await _monitorService.EditMonitorAsync(monitor);
-            await DialogService.ShowAlertAsync("Successful","Save","OK");
+            MonitorModel editMonitor = await _monitorService.EditMonitorAsync(monitor);
+            await DialogService.ShowAlertAsync(AppResources.Successful,AppResources.Save, AppResources.OK);
 
         }
 
@@ -87,6 +113,21 @@ namespace Monitor
 			}
 		}
 
+        int _interval= 1;
+        public int Interval 
+        {
+            set
+            { 
+                _interval= value;
+                RaisePropertyChanged(() => Interval);             
+            }
+            get
+            {
+                return _interval;
+            }
+        }
+
+
 		string _description;
 		public string Description
 		{
@@ -100,20 +141,6 @@ namespace Monitor
 				return _description;
 			}
 		}
-
-		//bool _alerts;
-		//public bool Alerts 
-		//{
-		//	set
-  //          { 
-  //              _alerts = value; 
-  //              RaisePropertyChanged(() => Alerts);
-		//	}
-		//	get
-		//	{
-		//		return _alerts;
-		//	}
-		//}
 
         bool _sms;
         public bool SMS 

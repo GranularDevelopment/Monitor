@@ -3,76 +3,187 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Monitor;assembly=Monitor"
              xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+             xmlns:i18n="clr-namespace:Monitor.Helpers; assembly=Monitor"
              xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
              xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
              Title="Settings"
              x:Class="Monitor.SettingsView"
-             BackgroundImage="background.png"
              >
     <ContentView.Content>
      <ScrollView>
-        <StackLayout > 
-
-            <Label Text="Subcription Status"
-                   FontSize="Medium" 
-                   HorizontalOptions="Center"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,20"/>
-
-
-            <Label Text="Free"
-                   FontSize="Medium" 
-                   HorizontalOptions="Center"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,20"/>
-
-            <Label Text="1 free monitor"
-                   FontSize="Micro" 
-                   HorizontalOptions="Center"
-                   FontAttributes="Bold"
-                   Margin="0,0,0,20"/>
-
-
-
-
-        <Grid Padding="0,40,0,0">
+     <Grid Padding="0,40,0,0">
       <Grid.RowDefinitions>
-        <RowDefinition Height="40" />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition />
-      
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="1" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="1" />
+        <RowDefinition Height="*" />
       </Grid.RowDefinitions>
 
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
         <ColumnDefinition Width="40" />
       </Grid.ColumnDefinitions> 
+<!--        <StackLayout VerticalOptions="FillAndExpand"> -->
+
+            <Label 
+                  Grid.Row="0" 
+                  Grid.ColumnSpan="4"
+                  Text="{i18n:Translate SubscriptionTitle}"
+                   Style="{StaticResource labelPrimaryStyle}"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,20"/>
+
+            <Label 
+                  Grid.Row="1" 
+                  Grid.ColumnSpan="4"
+                  Text="{Binding SubscriptionType}"
+                  Style="{StaticResource labelPrimaryStyle}"
+                  HorizontalOptions="Center"
+                  Margin="0,0,0,20"/>
+
+            <Label 
+                  Grid.Row="2" 
+                  Grid.ColumnSpan="4"
+                  Text="{Binding SubscriptionDescription}"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  HorizontalOptions="Center"
+                  Margin="0,0,0,20"/>
+
+             <BoxView Grid.Row="3"
+                 Grid.ColumnSpan="4"
+                 Color="Black"
+                 WidthRequest="1"
+                 IsVisible="{Binding IsFreeAccount}"
+                 />
+
+            <Label 
+                  Grid.Row="4" 
+                  Grid.ColumnSpan="4"
+                  Text="Basic"
+                  Style="{StaticResource labelPrimaryStyle}"
+                  HorizontalOptions="Center"
+                  IsVisible="{Binding IsFreeAccount}"
+                />
+
+            <Label Grid.Row="5" 
+                  Grid.ColumnSpan="4"
+                  FontSize="14"
+                  Text="&#x2022;10 Monitors"
+                  HorizontalTextAlignment="Center"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                   />
+
+            <Label 
+                  Grid.Row="6" 
+                  Grid.ColumnSpan="4"
+                  Text="&#x2022;24x7 monitoring"
+                  FontSize="14"
+                  HorizontalTextAlignment="Center"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                />
+
+            <Label 
+                  Grid.Row="7" 
+                  Grid.ColumnSpan="4"
+                  FontSize="14"
+                  HorizontalTextAlignment="Center"
+                  Text="&#x2022;Reports and Analytics"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                />
+
+
+            <Button 
+                Grid.Row="9" 
+                Grid.ColumnSpan="4"
+                Style="{StaticResource submitButtonStyle}" 
+                Text="{i18n:Translate Upgrade}"
+                Command="{Binding UpgradeBasicCommand}"
+                IsVisible="{Binding IsFreeAccount}"
+                  />
+
+            <BoxView Grid.Row="10"
+                 Grid.ColumnSpan="4"
+                 Color="Black"
+                 WidthRequest="1"
+                  IsVisible="{Binding IsFreeAccount}"
+                 />
+
+            <Label 
+                  Grid.Row="11" 
+                  Grid.ColumnSpan="4"
+                  HorizontalOptions="Center"
+                  Text="Premium"
+                  Style="{StaticResource labelPrimaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                />
+
+           <Label
+                  Grid.Row="12" 
+                  Grid.ColumnSpan="4"
+                  FontSize="14"
+                  Text="&#x2022;50 Monitors"
+                  HorizontalTextAlignment="Center"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                  />
+
+            <Label 
+                  Grid.Row="13" 
+                  Grid.ColumnSpan="4"
+                  Text="&#x2022;24x7 monitoring"
+                  FontSize="14"
+                  HorizontalTextAlignment="Center"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                />
+
+            <Label 
+                  Grid.Row="14" 
+                  Grid.ColumnSpan="4"
+                  FontSize="14"
+                  HorizontalTextAlignment="Center"
+                  Text="&#x2022;Reports and Analytics"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  IsVisible="{Binding IsFreeAccount}"
+                />
+
+            <Button 
+                Grid.Row="15" 
+                Grid.ColumnSpan="4"
+                Style="{StaticResource submitButtonStyle}" 
+                Text="{i18n:Translate Upgrade}"
+                Command="{Binding UpgradePremiumCommand}"
+                IsVisible="{Binding IsFreeAccount}"
+                />
+
+
+       
 
 
 
-              </Grid>
-            <StackLayout>
-            <Button Style="{StaticResource submitButtonStyle}" 
-                    Text="[ Upgrade ]"
-                        />
 
-            </StackLayout>
-            <StackLayout
-                Margin="20,0,20,0"
-                Orientation="Horizontal"
-                HorizontalOptions="FillAndExpand"
-                > 
-
-
-
-            </StackLayout>
-        </StackLayout>
-
+        <!--<StackLayout Style="{StaticResource footerStyle}" >
+            <Button 
+                Style="{StaticResource submitButtonStyle}" 
+                Text="{i18n:Translate Upgrade}"
+                Command="{Binding UpgradeCommand}"/>-->
+<!--        </StackLayout>-->
+<!--    </StackLayout>-->
+    </Grid>
     </ScrollView>
     </ContentView.Content>
 </ContentPage>

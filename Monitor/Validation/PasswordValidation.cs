@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace Monitor.Validation
 {
-	public class URLRule<T>: IValidationRule<T>
+    public class PasswordValidation<T>: IValidationRule<T>
     {
-		public string ValidationMessage { get; set; }  
+        public string ValidationMessage { get; set; }  
 
         public bool Check(T value)  
         {  
@@ -15,8 +15,7 @@ namespace Monitor.Validation
             }  
 
             var str = value as string;  
-            Regex regex = new Regex(@"^(http|https):\/\/+[\www\d]+\.[\w]+(\/[\w\d]+)?");
-                        //Regex regex = new Regex(@"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$");
+            Regex regex = new Regex( @"^(?=[^\d_].*?\d)\w(\w|[!@#$%]){7,20}");
             Match match = regex.Match(str);  
 
             return match.Success;  

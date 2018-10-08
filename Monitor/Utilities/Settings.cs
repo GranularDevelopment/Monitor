@@ -1,6 +1,8 @@
 // Helpers/Settings.cs
+using Monitor.Enums;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System.Collections;
 namespace Monitor
 {
 	/// <summary>
@@ -22,8 +24,9 @@ namespace Monitor
 
 		private static string _accessToken = "";
 		private static string _userName= "";
+        private static int _accountType = 1;
 		private static int _userId=0;
-        private static bool _useMocks = true;
+        private static bool _useMocks = false;
 
 		#endregion
 
@@ -37,6 +40,12 @@ namespace Monitor
         {
             get{return _userName;}
             set{ _userName= value;}
+        }
+
+        public static int AccountType
+        {
+            get{return _accountType ;}
+            set{ _accountType = value;}
         }
 
 		public static int UserId 
