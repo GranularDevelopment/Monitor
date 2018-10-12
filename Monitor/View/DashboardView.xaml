@@ -48,31 +48,55 @@
          <Frame 
                 HasShadow="false"
                 BorderColor="#3c4350"
+<<<<<<< HEAD
                 HeightRequest="100"
                 HorizontalOptions="FillAndExpand"
                 BackgroundColor="#White" >
 
                 <StackLayout>
+=======
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="#White" >
+
+                <StackLayout  >
+                <StackLayout Orientation="Vertical">
+>>>>>>> master
                 <StackLayout Orientation="Horizontal">
                             <Label 
                                    Style="{StaticResource labelSecondaryStyle}"
                                    HorizontalOptions="StartAndExpand" 
                                    Text="{Binding Name}" 
                                    VerticalTextAlignment="Start" />
+<<<<<<< HEAD
+=======
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+>>>>>>> master
                             <Label 
                                    Style="{StaticResource labelSecondaryStyle}"
                                    HorizontalOptions="StartAndExpand" 
                                    Text="{Binding URL}" 
                                    VerticalTextAlignment="Center" />
+<<<<<<< HEAD
+=======
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+>>>>>>> master
                             <Label 
                                    Style="{StaticResource labelSecondaryStyle}"
                                    HorizontalOptions="StartAndExpand" 
                                    Text="{Binding Description}" 
                                    VerticalTextAlignment="Center" />
 
+<<<<<<< HEAD
                             <Image HorizontalOptions="End" Source="{Binding StatusCode}" HeightRequest="40" />
                 </StackLayout>
                             <Label Text="{Binding Description}" VerticalTextAlignment="Center" />
+=======
+                </StackLayout>
+                            <Image HorizontalOptions="End" Source="{Binding StatusCode}" HeightRequest="40" />
+                </StackLayout>
+>>>>>>> master
                         </StackLayout>
                         </Frame>
                 </ViewCell>

@@ -26,6 +26,12 @@ namespace Monitor.Droid
 		
 		public static void UpdateIdValues()
 		{
+<<<<<<< HEAD:Monitor.Android/Resources/Resource.designer.cs
+=======
+<<<<<<< Updated upstream:Droid/Resources/Resource.designer.cs
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::GranularMonitorSystem.Droid.Resource.Attribute.actionBarSize;
+=======
+>>>>>>> master:Droid/Resources/Resource.designer.cs
 			global::AndroidHUD.Resource.Attribute.ahBarColor = global::Monitor.Droid.Resource.Attribute.ahBarColor;
 			global::AndroidHUD.Resource.Attribute.ahBarLength = global::Monitor.Droid.Resource.Attribute.ahBarLength;
 			global::AndroidHUD.Resource.Attribute.ahBarWidth = global::Monitor.Droid.Resource.Attribute.ahBarWidth;
@@ -63,7 +69,13 @@ namespace Monitor.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::Monitor.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::Monitor.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::Monitor.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+<<<<<<< HEAD:Monitor.Android/Resources/Resource.designer.cs
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Monitor.Droid.Resource.Attribute.actionBarSize;
+=======
+			global::Splat.Resource.String.library_name = global::Monitor.Droid.Resource.String.library_name;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Monitor.Droid.Resource.Attribute.actionBarSize;
+>>>>>>> Stashed changes:Monitor.Android/Resources/Resource.designer.cs
+>>>>>>> master:Droid/Resources/Resource.designer.cs
 		}
 		
 		public partial class Animation

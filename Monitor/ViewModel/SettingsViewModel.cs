@@ -9,12 +9,20 @@ using Monitor.Services.Identity;
 using Plugin.InAppBilling;
 using Plugin.InAppBilling.Abstractions;
 using Xamarin.Forms;
+<<<<<<< HEAD
+=======
+using System.Reactive.Linq;
+using Akavache;
+>>>>>>> master
 
 namespace Monitor
 {
     public class SettingsViewModel: ViewModelBase
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         public readonly IIdentityService _userService;
 
         Dictionary<int, string> SubscriptionStrings = new Dictionary<int, string>{
@@ -172,6 +180,10 @@ namespace Monitor
             set{
             _isPremiumAccount=value;
             RaisePropertyChanged(() => _isPremiumAccount);
+<<<<<<< HEAD
+=======
+         }
+>>>>>>> master
         }
     }
 }
