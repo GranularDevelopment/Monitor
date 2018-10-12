@@ -13,12 +13,7 @@ namespace Monitor
     public partial class App : Application
     {
 		public static bool IsUserLoggedIn = false;
-<<<<<<< HEAD
-        
-        
-=======
 
->>>>>>> master
 		public App()
         {
             IsUserLoggedIn = false; 

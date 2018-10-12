@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-
-=======
 using System.Collections.ObjectModel;
->>>>>>> master
 using Xamarin.Forms;
 
 namespace Monitor
@@ -14,13 +10,11 @@ namespace Monitor
         public DashboardView()
         {
             InitializeComponent();
-<<<<<<< HEAD
         }
 
 		protected override void OnAppearing()
         {
 
-=======
             listView.ItemsSource = new ObservableCollection<MonitorModel>{
             new MonitorModel
             {
@@ -34,13 +28,8 @@ namespace Monitor
                 PushAlert = true,
                 SMSAlert =true ,
             }};
-        }
-
-        protected override void OnAppearing()
-        {
 
 
->>>>>>> master
             var vm = BindingContext as DashboardViewModel;
 
             base.OnAppearing();
