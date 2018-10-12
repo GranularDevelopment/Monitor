@@ -3,8 +3,14 @@ using Xamarin.Forms.Platform.iOS;
 using Xamarin.Forms;
 using UIKit;
 using CoreGraphics;
+<<<<<<< Updated upstream:iOS/Renderers/NoHelpEntryRenderer.cs
 using GranularMonitorSystem.iOS;
 using GranularMonitorSystem.Common.Renderers;
+=======
+using Monitor.iOS;
+using Monitor.Renderers;
+using Akavache;
+>>>>>>> Stashed changes:Monitor.iOS/Renderers/NoHelpEntryRenderer.cs
 
 [assembly: ExportRenderer(typeof(NoHelperEntry), typeof(NoHelperEntryRenderer))]
 namespace GranularMonitorSystem.iOS

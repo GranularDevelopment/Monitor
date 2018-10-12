@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+            xmlns:local="clr-namespace:Monitor.Controls;assembly=Monitor"
+            xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
+            xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
+            xmlns:converters="clr-namespace:Monitor.Converters; assembly=Monitor"
+            viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+            x:Name="DashboardPage"
+            Title="Dashboard"
+            BackgroundColor="White"
+            x:Class="Monitor.DashboardView" >
+
+   <!-- Keep ContentPage.Resources outside of ContentPage.Content -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common:InverseConverter x:Key="boolNegation" />
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout BackgroundColor="White">
+    <ListView x:Name="listView"   
+              HasUnevenRows="true" 
+              SeparatorVisibility="None" 
+              ItemsSource="{Binding MonitorContainers}"
+              SelectedItem="{Binding monitorSelected}"
+              IsPullToRefreshEnabled="true"
+              RefreshCommand="{Binding RefreshMonitorCommand }"
+              IsRefreshing ="{Binding IsListViewRefreshing}"
+              >
+              <ListView.Behaviors>
+                                    <behaviors:EventToCommandBehavior
+                                        EventName="ItemTapped"
+                                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                                        Command="{Binding EditCommand}" />
+                                </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate >
+                <ViewCell>
+                 <ViewCell.ContextActions>
+            <MenuItem  Command="{Binding Path=BindingContext.OnDeleteCommand, Source={x:Reference DashboardPage}}" 
+                       CommandParameter="{Binding .}"
+                       Text="Delete" 
+                       IsDestructive="True" />
+         </ViewCell.ContextActions>
+         <Frame 
+                HasShadow="false"
+                BorderColor="#3c4350"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="#White" >
+
+                <StackLayout  >
+                <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                            <Label 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   HorizontalOptions="StartAndExpand" 
+                                   Text="{Binding Name}" 
+                                   VerticalTextAlignment="Start" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                            <Label 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   HorizontalOptions="StartAndExpand" 
+                                   Text="{Binding URL}" 
+                                   VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                            <Label 
+                                   Style="{StaticResource labelSecondaryStyle}"
+                                   HorizontalOptions="StartAndExpand" 
+                                   Text="{Binding Description}" 
+                                   VerticalTextAlignment="Center" />
+
+                </StackLayout>
+                            <Image HorizontalOptions="End" Source="{Binding StatusCode}" HeightRequest="40" />
+                </StackLayout>
+                        </StackLayout>
+                        </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+    <StackLayout>
+      <Button Margin="80,20,80,20" 
+                    Text="[ Add Monitor ]"
+                    Style="{StaticResource submitButtonStyle}" 
+                    Command="{Binding AddCommand}"
+                        />
+    </StackLayout>
+    </StackLayout>
+</ContentPage>
