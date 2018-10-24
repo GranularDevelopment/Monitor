@@ -31,13 +31,13 @@ namespace Monitor
         {
             _model = monitor;
 
+            Name = monitor.Name;
             URL = monitor.URL;
             StatusCode =  monitor.StatusCode;
             Description = monitor.Description;
             SMS = monitor.SMSAlert; 
             Email =  monitor.EmailAlert;
             Push = monitor.PushAlert;
-            Interval = monitor.Interval;
         }
 
         public ICommand ApplyCommand => new Command(async() => await ApplyCommandAsync());
@@ -47,11 +47,11 @@ namespace Monitor
         {
             MonitorModel model = new MonitorModel{
                 Id = _model.Id,
+                Name = Name,
                 UserId = Settings.UserId,
                 URL = URL,
                 SMSAlert = SMS,
                 PushAlert =  Push,
-                Interval = Interval
             };
 
             try
@@ -85,6 +85,20 @@ namespace Monitor
 
         }
 
+        string _name;
+        public string Name 
+        {
+            set
+            {
+                _name = value;
+                RaisePropertyChanged(() => Name);
+            }
+            get
+            {
+                return _name;
+            }
+        }
+
         string _url;
         public string URL 
         {
@@ -112,21 +126,6 @@ namespace Monitor
 				return _statusCode;
 			}
 		}
-
-        int _interval= 1;
-        public int Interval 
-        {
-            set
-            { 
-                _interval= value;
-                RaisePropertyChanged(() => Interval);             
-            }
-            get
-            {
-                return _interval;
-            }
-        }
-
 
 		string _description;
 		public string Description

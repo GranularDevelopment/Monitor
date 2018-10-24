@@ -42,7 +42,7 @@ namespace Monitor
 			builder.RegisterType<MasterDetailViewModel>();
             builder.RegisterType<MonitorViewModel>();
             builder.RegisterType<SettingsViewModel>();
-
+            builder.RegisterType<PaymentWebViewModel>();
             //Sub View models
 
             //Service  

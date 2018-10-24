@@ -1,7 +1,7 @@
 using System;
 using Plugin.Settings.Abstractions;
 
-namespace Monitor.View
+namespace Monitor
 {
 	public class ApplicationSettings: ISettings
 	{

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Monitor;assembly=Monitor"
+             xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+             xmlns:i18n="clr-namespace:Monitor.Helpers; assembly=Monitor"
+             xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
+             xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             Title="Settings"
+             x:Class="Monitor.SettingsView"
+             >
+    <ContentView.Content>
+     <ScrollView>
+     <Grid Padding="0,40,0,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="1" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="40" />
+      </Grid.ColumnDefinitions> 
+
+            <Label 
+                  Grid.Row="0" 
+                  Grid.ColumnSpan="4"
+                  Text="{i18n:Translate SubscriptionTitle}"
+                   Style="{StaticResource labelPrimaryStyle}"
+                   HorizontalOptions="CenterAndExpand"
+                   Margin="0,0,0,20"/>
+
+            <Label 
+                  Grid.Row="1" 
+                  Grid.ColumnSpan="4"
+                  Text="{Binding SubscriptionType}"
+                  Style="{StaticResource labelPrimaryStyle}"
+                  HorizontalOptions="Center"
+                  Margin="0,0,0,20"/>
+
+            <Label 
+                  Grid.Row="2" 
+                  Grid.ColumnSpan="4"
+                  Text="{Binding SubscriptionDescription}"
+                  Style="{StaticResource labelSecondaryStyle}"
+                  HorizontalOptions="Center"
+                  Margin="0,0,0,20"/>
+
+            <Button 
+                Grid.Row="3" 
+                Grid.ColumnSpan="4"
+                Style="{StaticResource submitButtonStyle}" 
+                Text="{i18n:Translate Upgrade}"
+                Command="{Binding UpgradeCommand}"
+                />
+    </Grid>
+    </ScrollView>
+    </ContentView.Content>
+</ContentPage>

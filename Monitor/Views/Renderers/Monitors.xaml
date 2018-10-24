@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexLayout 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="Monitor.Renderers.Monitors"
+    WidthRequest="90" HeightRequest="110"
+    Direction="Column" AlignContent="Center"
+    x:Name="self"
+    >
+
+   <Button BorderColor="{Binding StatusCode}"
+            BorderWidth="5"
+            BackgroundColor="White"
+            Clicked="click"
+            HeightRequest="90" CornerRadius="45"
+            Image="{Binding Icon}"/>
+    
+     <Label Text="{Binding Name}" 
+            Margin="0,4,0,0"
+            HeightRequest="20"
+            FontSize="9" 
+            HorizontalTextAlignment="Center" 
+            HorizontalOptions="CenterAndExpand"/> 
+
+</FlexLayout>

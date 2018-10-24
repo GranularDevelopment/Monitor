@@ -34,8 +34,19 @@ namespace Monitor
             _userService = userService;
         }
 
-        public ICommand UpgradeBasicCommand => new Command(async () =>  await upgradeBasicAsync());
-        public ICommand UpgradePremiumCommand => new Command(async () =>  await upgradePremiumAsync());
+        public ICommand UpgradeCommand => new Command(async () => await upgradeAsync());
+
+        private async Task upgradeAsync()
+        {
+            try{
+                await NavigationService.NavigateToAsync<PaymentWebViewModel>();
+            }
+            catch(Exception e){
+                Console.WriteLine(e.ToString());
+
+            }
+
+        }
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -44,86 +55,6 @@ namespace Monitor
             SubscriptionDescription = SubscriptionDescriptionStrings[Settings.AccountType];
         }
 
-        void displayAccountTypes(){
-            IsFreeAccount = (Settings.AccountType== 1)? true: false;
-            IsBasicAccount = (Settings.AccountType== 2)? true: false;
-            IsPremiumAccount = (Settings.AccountType== 3)? true: false;
-
-            if(IsFreeAccount){
-                IsBasicAccount= false; 
-                IsPremiumAccount= false; 
-            }else if(IsBasicAccount) {
-                IsFreeAccount= false; 
-                IsPremiumAccount= false; 
-            }
-            else if (IsPremiumAccount){
-                IsFreeAccount= false; 
-                IsPremiumAccount= false; 
-            }
-
-
-
-        }
-
-        private async Task upgradeBasicAsync()
-        {
-            await PurchaseItem("10monitor");
-
-        }
-
-        private async Task upgradePremiumAsync()
-        {
-            await PurchaseItem("50monitor");
-
-        }
-
-        public async Task<bool> PurchaseItem(string productId, string payload ="123")
-        {
-            var billing = CrossInAppBilling.Current;
-            try
-            {
-                var connected = await billing.ConnectAsync(ItemType.Subscription);
-                if (!connected)
-                {
-                    //we are offline or can't connect, don't try to purchase
-                    return false;
-                }
-
-                //check purchases
-                var purchase = new object();//await billing.PurchaseAsync(productId, ItemType.Subscription, payload);
-
-                //possibility that a null came through.
-                if(purchase == null)
-                {
-                    //did not purchase
-                }
-                else
-                {
-                    User user = new User{
-                        UserName = Settings.UserName 
-                    };
-
-                    await _userService.UpgradeAccountAsync(user);
-                    //purchased!
-                }
-            }
-            catch (InAppBillingPurchaseException purchaseEx)
-            {
-                //Billing Exception handle this based on the type
-                Debug.WriteLine("Error: " + purchaseEx);
-            }
-            catch (Exception ex)
-            {
-                //Something else has gone wrong, log it
-                Debug.WriteLine("Issue connecting: " + ex);
-            }
-            finally
-            {
-                await billing.DisconnectAsync();
-            }
-
-            return true;
-        }
 
         string _subscriptionType;
         public string SubscriptionType
@@ -145,13 +76,14 @@ namespace Monitor
             }
         }
 
+
         bool _isFreeAccount;
         public bool IsFreeAccount 
         {
             get{return _isFreeAccount;}
             set{
                 _isFreeAccount=value;
-                RaisePropertyChanged(() => _isFreeAccount);
+                RaisePropertyChanged(() => IsFreeAccount);
             }
         }
 
@@ -161,7 +93,7 @@ namespace Monitor
             get{return _isBasicAccount;}
             set{
                 _isBasicAccount=value;
-                RaisePropertyChanged(() => _isBasicAccount);
+                RaisePropertyChanged(() => IsBasicAccount);
             }
         }
 
@@ -171,7 +103,7 @@ namespace Monitor
             get{return _isPremiumAccount;}
             set{
             _isPremiumAccount=value;
-            RaisePropertyChanged(() => _isPremiumAccount);
+            RaisePropertyChanged(() => IsPremiumAccount);
          }
         }
     }

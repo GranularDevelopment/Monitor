@@ -43,15 +43,7 @@
     <None Remove="View\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="View\AddView.xaml" />
-    <None Include="View\CustomNavigationView.xaml" />
-    <None Include="View\DashboardView.xaml" />
-    <None Include="View\ForgotPasswordView.xaml" />
-    <None Include="View\LoginView.xaml" />
-    <None Include="View\SignUpView.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
+    <Folder Include="Views\" />
     <Folder Include="Effects\" />
     <Folder Include="Images\" />
     <Folder Include="Extension\" />
@@ -61,6 +53,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Localization\" />
     <Folder Include="Services\Payment\" />
+    <Folder Include="Views\Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="View\AddView.xaml.cs">

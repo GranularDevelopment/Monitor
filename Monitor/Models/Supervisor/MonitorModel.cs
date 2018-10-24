@@ -40,5 +40,8 @@ namespace Monitor
 
 		[JsonProperty(PropertyName = "statuscode")]
         public string StatusCode{ get; set; }
+
+        //[JsonProperty(PropertyName = "statuscode")]
+        //public string AlertCode { get; set; }
     }
 }

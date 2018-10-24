@@ -22,6 +22,7 @@ namespace Monitor
         }
 
         public ICommand EditCommand => new Command(async (sender)   => await EditCommandAsync(sender));
+        public ICommand MonitorSelected => new Command(async (sender) => await EditCommandAsync(sender));
         public ICommand AddCommand => new Command(async ()   => await AddCommandAsync());
         public ICommand RefreshMonitorCommand => new Command(async() => await RefreshMonitorCommandAsync());
         public ICommand OnDeleteCommand => new Command(async(sender) => await OnDeleteCommandAsync(sender));
@@ -130,7 +131,7 @@ namespace Monitor
                 MonitorContainers.Add(new MonitorModel{ 
                     Name = model.Name, 
 					Description = model.Description,
-                    StatusCode = (model.StatusCode == "200") ? "success.png" : "error.png",
+                    StatusCode =  (model.StatusCode == "200") ? "success.png" : "error.png",
                     Id = model.Id,
                     UserId = model.UserId,
                     URL = model.URL,
@@ -139,7 +140,9 @@ namespace Monitor
                     PushAlert = model.PushAlert,
                     SMSAlert = model.SMSAlert
 				});
-			}
+                //AlertCode = (model.StatusCode == "200") ? "success.png" : "error.png";
+                AlertCode = (model.StatusCode == "200") ? "Color.Green" : "Color.Red";
+            }
         }
 
         bool isListViewRefreshing = false;
@@ -182,6 +185,20 @@ namespace Monitor
             get
             {
                 return statusCode;
+            }
+        }
+
+        string alertCode = "";
+        public string AlertCode
+        {
+            set
+            {
+                alertCode = value;
+                RaisePropertyChanged(() => AlertCode);
+            }
+            get
+            {
+                return alertCode;
             }
         }
 

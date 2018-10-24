@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
+             xmlns:local="clr-namespace:Monitor;assembly=Monitor"
+             xmlns:converters="clr-namespace:Monitor.Converters; assembly=Monitor"
+             xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
+             xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
+             x:Class="Monitor.PaymentWebView"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true" >
+    <ContentPage.Resources>
+    <ResourceDictionary>
+        <converters:WebNavigatingEventArgsConverter x:Key="WebNavigatingEventArgsConverter" />
+        <converters:WebNavigatedEventArgsConverter x:Key="WebNavigatedEventArgsConverter" />
+    </ResourceDictionary>
+    </ContentPage.Resources>
+    <WebView 
+        Source="https://granulardevelopment.com/mobile_pricing">
+            <WebView.Behaviors>
+                        <behaviors:EventToCommandBehavior 
+                            EventName="Navigating"
+                            EventArgsConverter="{StaticResource WebNavigatingEventArgsConverter }"
+                            Command="{Binding NavigatingCommand}" />
+                        <behaviors:EventToCommandBehavior 
+                            EventName="Navigated"
+                            EventArgsConverter="{StaticResource WebNavigatedEventArgsConverter }"
+                            Command="{Binding NavigatedCommand}" />
+            </WebView.Behaviors> 
+    </WebView>
+</ContentPage>

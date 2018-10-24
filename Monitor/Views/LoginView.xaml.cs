@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Monitor.View;
 using Xamarin.Forms;
 
 namespace Monitor
@@ -22,11 +21,6 @@ namespace Monitor
 
             base.OnAppearing();
         }
-
-
-
-
-
 
         protected override void OnDisappearing()
         {
