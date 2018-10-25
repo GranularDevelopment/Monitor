@@ -137,6 +137,12 @@ namespace Monitor.Localization {
             }
         }
         
+        internal static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
         internal static string NameRequired {
             get {
                 return ResourceManager.GetString("NameRequired", resourceCulture);
@@ -182,6 +188,12 @@ namespace Monitor.Localization {
         internal static string ForgotPasswordBtn {
             get {
                 return ResourceManager.GetString("ForgotPasswordBtn", resourceCulture);
+            }
+        }
+        
+        internal static string EditMonitor {
+            get {
+                return ResourceManager.GetString("EditMonitor", resourceCulture);
             }
         }
         

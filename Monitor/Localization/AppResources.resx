@@ -178,6 +178,10 @@
     <value>Added</value>
   </data>
 
+  <data name="Apply" xml:space="preserve">
+    <value>[ Apply ]</value>
+  </data>
+
   <data name="NameRequired" xml:space="preserve">
     <value>A name is required.</value>
   </data>
@@ -208,6 +212,10 @@
 
     <data name="ForgotPasswordBtn" xml:space="preserve">
     <value>Forgot Password</value>
+  </data>
+
+   <data name="EditMonitor" xml:space="preserve">
+    <value>Edit Monitor</value>
   </data>
 
   <data name="SignUpBtn" xml:space="preserve">

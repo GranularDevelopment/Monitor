@@ -38,12 +38,6 @@ namespace Monitor
             base.OnAppearing();
         }
 
-
-        void click (object sender, EventArgs e){
-
-            Navigation.PushAsync(new MonitorsPageView());
-        }
-
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

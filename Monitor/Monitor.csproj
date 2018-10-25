@@ -38,6 +38,7 @@
     <EmbeddedResource Remove="View\SubView\ServerDiskSpaceView.xaml" />
     <EmbeddedResource Remove="View\SubView\ServerIOView.xaml" />
     <EmbeddedResource Remove="View\SubView\ServerMemoryView.xaml" />
+    <EmbeddedResource Remove="Views\Renderers\Monitors.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="View\.DS_Store" />
@@ -53,7 +54,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="Localization\" />
     <Folder Include="Services\Payment\" />
-    <Folder Include="Views\Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="View\AddView.xaml.cs">

@@ -4,12 +4,12 @@
              xmlns:local="clr-namespace:Monitor;assembly=Monitor"
              xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor"
              xmlns:converters="clr-namespace:Monitor.Converters;assembly=Monitor"
+             xmlns:i18n="clr-namespace:Monitor.Helpers; assembly=Monitor"
              xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor"
              xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
              Title="Monitor"
-             x:Class="Monitor.MonitorView"
-             >
+             x:Class="Monitor.MonitorView" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <common:InverseConverter x:Key="boolNegation" />
@@ -21,89 +21,17 @@
             <On Platform="iOS" Value="0, 0, 0, 0" />
         </OnPlatform>
     </ContentPage.Padding>
-    <StackLayout> 
+    <ScrollView>
+        <StackLayout > 
 
-    <!--<Grid Padding="10,40,10,0">
+            <Label Text="{i18n:Translate EditMonitor}"
+                   Style="{StaticResource labelPrimaryStyle}"
+                   HorizontalOptions="Center"
+                   />
+
+    <Grid Padding="0,40,0,0">
       <Grid.RowDefinitions>
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition />
-        <RowDefinition  Height="1"/>
-      
-      </Grid.RowDefinitions>
-
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" />
-        <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="40" />
-      </Grid.ColumnDefinitions> 
-
-      <Entry   Grid.Row="0" 
-               Grid.ColumnSpan="3" 
-               HorizontalOptions="FillAndExpand"
-               Style="{StaticResource labelPrimaryStyle}"
-               Text="{Binding Name}"
-               /> 
-
-        <Entry Grid.Row="1" 
-               Grid.ColumnSpan="3" 
-               HorizontalOptions="FillAndExpand"
-               Style="{StaticResource labelPrimaryStyle}"
-               Text="{Binding URL}"/> 
-
-        <Label Grid.Row="2"
-               Grid.Column="1"
-               Style="{StaticResource labelSecondaryStyle}"
-               Text="Status Code"
-                />
-
-        <Image Grid.Row="2" 
-               Grid.Column="2"
-               HorizontalOptions="End" 
-               Margin="0,0,10,0"
-               Source="{Binding StatusCode}"/>
-
-        <Label Grid.Row="3" 
-               Grid.Column="1"
-               Style="{StaticResource labelSecondaryStyle}"
-               Text="Description" />
-
-        <Label Grid.Row="3"
-               Grid.Column="2"
-               Style="{StaticResource labelSecondaryStyle}"
-               Text="{Binding Description}"/>
-
-         <Label Grid.Row="7" 
-               Grid.Column="1"
-               Style="{StaticResource labelSecondaryStyle}"
-               Text="Email" />
-
-         <Switch 
-         IsToggled="{Binding Email}"
-                Grid.Row="7"
-                 Grid.Column="1"
-                 HorizontalOptions="End"
-                 />
-
-        <Label Grid.Row="8" 
-               Grid.Column="1"
-               Style="{StaticResource labelSecondaryStyle}"
-               Text="Push Notification" />
-
-         <Switch 
-         IsToggled="{Binding Push}"
-                Grid.Row="8"
-                 Grid.Column="1"
-                 HorizontalOptions="End" />
-
-    </Grid>
-        -->
-
-      Grid Padding="0,40,0,0">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="40" />j
+        <RowDefinition Height="40" />
         <RowDefinition />
         <RowDefinition />
         <RowDefinition />
@@ -123,38 +51,76 @@
             Grid.Row="0"
             Grid.Column="1"
             Style="{StaticResource entryStyle}"
-            x:Name="usernameEntry"
-            Placeholder="{i18n:Translate EmailPlaceholder}" 
-            Text="{Binding Username.Value, Mode=TwoWay}" >
+            Text="{Binding Name}" >
         </Entry>
 
-        <Label 
-            Grid.Row="1" 
-            Grid.Column="1" 
-            HorizontalOptions="Center" 
-            Text="{Binding Username.Errors, Converter={StaticResource FirstValidationErrorConverter}"
-            Style="{StaticResource ValidationErrorLabelStyle}" />
-
         <Entry 
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="1"
-            x:Name="passwordEntry" 
             Style="{StaticResource entryStyle}"
-            IsPassword="true" 
-            Placeholder="{i18n:Translate PasswordPlaceholder}" 
-            Text="{Binding Password.Value, Mode=TwoWay}">
-            </Entry>
+            Text="{Binding URL}">
+        </Entry>
+
+        <Label Grid.Row="2"
+               Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Status Code"
+                />
+
+         <Image Grid.Row="2" 
+               Grid.Column="2"
+               HorizontalOptions="End" 
+               Margin="0,0,10,0"
+               Source="{Binding StatusCode}"/>
+        
+        <!--<Label Grid.Row="3" 
+               Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Description" />
+
+        <Label Grid.Row="3"
+               Grid.Column="2"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="{Binding Description}"/>-->
+
+        <Label Grid.Row="4"
+               Grid.Column="1"
+               HorizontalOptions="Center"
+               Style="{StaticResource labelPrimaryStyle}"
+               Text="Alerts"/>
+
+                
+        <Label Grid.Row="5" 
+               Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Email" />
+
+        <Switch 
+            IsToggled="{Binding Email}"
+            Grid.Row="5"
+            Grid.Column="1"
+            HorizontalOptions="End"
+            />
+
+       <!-- <Label Grid.Row="6" 
+               Grid.Column="1"
+               Style="{StaticResource labelSecondaryStyle}"
+               Text="Push Notification" />
+
+         <Switch 
+         IsToggled="{Binding Push}"
+                Grid.Row="6"
+                 Grid.Column="1"
+                 HorizontalOptions="End" />-->
 
         <Label 
             Grid.Row="3" 
             Grid.Column="1" 
             HorizontalOptions="Center" 
-            Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}"
             Style="{StaticResource ValidationErrorLabelStyle}" />
 
         </Grid>
             
-
 
         <StackLayout VerticalOptions="EndAndExpand" >
 
@@ -164,35 +130,13 @@
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}" />
 
-                <Button Style="{StaticResource submitButtonStyle}" 
-                    Text="{i18n:Translate SignInBtn}"
-                    Command="{Binding SignInCommand}"
-                        />
-                <StackLayout
-                Margin="20,0,20,0"
-                Orientation="Horizontal"
-                HorizontalOptions="FillAndExpand"
-                > 
+            <Button Style="{StaticResource submitButtonStyle}" 
+                Text="{i18n:Translate Apply}"
+                Command="{Binding ApplyCommand}"
+                />
 
-                <Button 
-                    HorizontalOptions="StartAndExpand"
-                    Style="{StaticResource buttonLinkStyle}"
-                    Text="{i18n:Translate ForgotPasswordBtn}"
-                    Command="{Binding ForgotPasswordCommand}"
-                        />
-
-                <Button 
-                    Style="{StaticResource buttonLinkStyle}"
-                    HorizontalOptions="EndAndExpand"
-                    Text="{i18n:Translate SignUpBtn}"
-                    Command="{Binding SignUpCommand}"
-                        />
-
-        <StackLayout Style="{StaticResource footerStyle}" >
-            <Button Style="{StaticResource submitButtonStyle}"
-                    Text="[ Apply ]"
-                    Command="{Binding ApplyCommand}"
-                        />
         </StackLayout>
-    </StackLayout>
+     </StackLayout>
+
+    </ScrollView>
 </ContentPage>
