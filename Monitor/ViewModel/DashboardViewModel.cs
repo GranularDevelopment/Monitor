@@ -135,13 +135,10 @@ namespace Monitor
                     Id = model.Id,
                     UserId = model.UserId,
                     URL = model.URL,
-                    Interval = model.Interval,
                     EmailAlert = model.EmailAlert,
                     PushAlert = model.PushAlert,
                     SMSAlert = model.SMSAlert
 				});
-                //AlertCode = (model.StatusCode == "200") ? "success.png" : "error.png";
-                AlertCode = (model.StatusCode == "200") ? "Color.Green" : "Color.Red";
             }
         }
 
@@ -185,20 +182,6 @@ namespace Monitor
             get
             {
                 return statusCode;
-            }
-        }
-
-        string alertCode = "";
-        public string AlertCode
-        {
-            set
-            {
-                alertCode = value;
-                RaisePropertyChanged(() => AlertCode);
-            }
-            get
-            {
-                return alertCode;
             }
         }
 

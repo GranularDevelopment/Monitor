@@ -11,5 +11,6 @@ namespace Monitor.Services.Identity
 		Task<User> ResetAsync<User>(User model);
         Task<User> UpgradeAccountAsync<User>(User model);
         Task<User> UserInfoAsync<User>();
+        Task<Device> DeviceAsync<Device>(Device device);
     }
 }

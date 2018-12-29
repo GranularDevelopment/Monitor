@@ -39,9 +39,9 @@ namespace Monitor
         private async Task upgradeAsync()
         {
             try{
-                await NavigationService.NavigateToAsync<PaymentWebViewModel>();
+                await NavigationService.NavigateToAsync<PaymentViewModel>();
             }
-            catch(Exception e){
+            catch (Exception e){
                 Console.WriteLine(e.ToString());
 
             }
@@ -51,8 +51,9 @@ namespace Monitor
         public override async Task InitializeAsync(object navigationData)
         {
             User user = await _userService.UserInfoAsync<User>();
-            SubscriptionType = SubscriptionStrings[Settings.AccountType]; 
-            SubscriptionDescription = SubscriptionDescriptionStrings[Settings.AccountType];
+            Settings.AccountType = user.AccountType; // i don't like this...
+            SubscriptionType = SubscriptionStrings[user.AccountType]; 
+            SubscriptionDescription = SubscriptionDescriptionStrings[user.AccountType];
         }
 
 

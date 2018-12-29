@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "708335952452",
+    "firebase_url": "https://granular-development-android.firebaseio.com",
+    "project_id": "granular-development-android",
+    "storage_bucket": "granular-development-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708335952452:android:04b3ca1ddc52f32c",
+        "android_client_info": {
+          "package_name": "com.granulardevelopment.Monitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708335952452-safrgqqtl3an13b4o5j6lpip23hsu9ba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZLlG2_i9LM5m5a0n0I2QH6pTUVkNDQJc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

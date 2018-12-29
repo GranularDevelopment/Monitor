@@ -16,7 +16,7 @@ namespace Monitor
 
         public async Task<MonitorModel> AddMonitorAsync(MonitorModel monitor)
         {
-            UriBuilder builder = new UriBuilder(GlobalSetting.Instance.AddMonitor);
+            UriBuilder builder = new UriBuilder(GlobalRoutingSettings.Instance.AddMonitor);
             string uri = builder.ToString();
 			MonitorModel monitorContainer = await _request.PostAsync(uri, monitor);
 
@@ -25,7 +25,7 @@ namespace Monitor
 
 		public async Task<MonitorContainer> GetMonitorsAsync()
         {
-            UriBuilder builder = new UriBuilder($"{GlobalSetting.Instance.GetMonitors}/{Settings.UserName}");
+            UriBuilder builder = new UriBuilder($"{GlobalRoutingSettings.Instance.GetMonitors}/{Settings.UserName}");
             string uri = builder.ToString();
             MonitorContainer monitorContainer = await _request.GetAsync<MonitorContainer>(uri);
 
@@ -34,7 +34,7 @@ namespace Monitor
 
 		public async Task<MonitorModel> GetMonitorAsync(MonitorModel model)
         {
-            UriBuilder builder = new UriBuilder($"{GlobalSetting.Instance.GetMonitor}/{model.Id}/{model.UserId}");
+            UriBuilder builder = new UriBuilder($"{GlobalRoutingSettings.Instance.GetMonitor}/{model.Id}/{model.UserId}");
             string uri = builder.ToString();
             MonitorModel monitorModel= await _request.GetAsync<MonitorModel>(uri);
 
@@ -43,7 +43,7 @@ namespace Monitor
 
 		public async Task<MonitorModel> EditMonitorAsync(MonitorModel model)
         {
-            UriBuilder builder = new UriBuilder(GlobalSetting.Instance.EditMonitor);
+            UriBuilder builder = new UriBuilder(GlobalRoutingSettings.Instance.EditMonitor);
             string uri = builder.ToString();
             MonitorModel monitorModel= await _request.PostAsync<MonitorModel>(uri,model);
 
@@ -53,7 +53,7 @@ namespace Monitor
         public async Task<MonitorModel> DeleteMonitorAsync(MonitorModel model)
         {
 
-            UriBuilder builder = new UriBuilder(GlobalSetting.Instance.DeleteMonitor);
+            UriBuilder builder = new UriBuilder(GlobalRoutingSettings.Instance.DeleteMonitor);
             string uri = builder.ToString();
             MonitorModel monitorModel= await _request.PostAsync<MonitorModel>(uri,model);
 

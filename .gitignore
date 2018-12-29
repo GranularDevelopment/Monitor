@@ -1,6 +1,7 @@
 Debug/
 *Constants.cs
-*GlobalSettings.cs
+*Settings.cs
+*GlobalRoutingSettings.cs
 *.vs
 # Autosave files
 *~

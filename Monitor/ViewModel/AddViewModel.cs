@@ -41,7 +41,6 @@ namespace Monitor
                 return;
 
             MonitorModel addMonitor = new MonitorModel{
-                Interval = Interval,
                 Name = Name.Value.Trim(),
                 URL = URL.Value.Trim(),
                 UserId = Settings.UserId,

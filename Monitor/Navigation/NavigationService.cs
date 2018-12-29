@@ -18,7 +18,16 @@ namespace Monitor
             }
         }
 
-		public Task InitializeAsync()
+        public Page PreviousPage
+        {
+            get
+            {
+                var mainPage = Application.Current.MainPage as CustomNavigationView;
+                var view = mainPage.Navigation.NavigationStack[mainPage.Navigation.NavigationStack.Count - 2];
+                return view;
+            }
+        }
+        public Task InitializeAsync()
         {
 			if (string.IsNullOrEmpty(Settings.AuthAccessToken))
 				return NavigateToAsync<LoginViewModel>();

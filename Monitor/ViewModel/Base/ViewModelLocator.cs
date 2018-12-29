@@ -43,6 +43,7 @@ namespace Monitor
             builder.RegisterType<MonitorViewModel>();
             builder.RegisterType<SettingsViewModel>();
             builder.RegisterType<PaymentWebViewModel>();
+            builder.RegisterType<PaymentViewModel>();
             //Sub View models
 
             //Service  

@@ -11,9 +11,6 @@ namespace Monitor
 		[JsonProperty(PropertyName = "name")]
         public string Name { get; set; } 
 	
-        [JsonProperty(PropertyName = "interval")] 
-        public int Interval { get; set; } 
-
 		[JsonProperty(PropertyName = "url")] 
         public string URL { get; set; } 
 

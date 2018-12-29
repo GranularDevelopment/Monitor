@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter.Push;
 using UIKit;
+using UserNotifications;
 
 namespace Monitor.iOS
 {
@@ -20,12 +22,48 @@ namespace Monitor.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
+        private MonitorUNUserNotificationCenterDelegate monitorNotificationDelegate = null;
+
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            // Your code, e.g. App Center setup code is here.
+
+            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            {
+                this.monitorNotificationDelegate = new MonitorUNUserNotificationCenterDelegate();
+
+                UNUserNotificationCenter.Current.Delegate = this.monitorNotificationDelegate;
+            }
+
+
+
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        {
+            Push.RegisteredForRemoteNotifications(deviceToken);
+        }
+
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        {
+            Push.FailedToRegisterForRemoteNotifications(error);
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            if (result)
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+            }
+            else
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+            }
         }
     }
 }

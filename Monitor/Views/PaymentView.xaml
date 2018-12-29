@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:common="clr-namespace:Monitor.Converters;assembly=Monitor" xmlns:converters="clr-namespace:Monitor.Converters; assembly=Monitor" xmlns:viewModelBase="clr-namespace:Monitor;assembly=Monitor" xmlns:behaviors="clr-namespace:Monitor.Behaviors;assembly=Monitor" viewModelBase:ViewModelLocator.AutoWireViewModel="true" xmlns:i18n="clr-namespace:Monitor.Helpers; assembly=Monitor" Title="Payment" x:Class="Monitor.PaymentView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <common:InverseConverter x:Key="boolNegation" />
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 Margin="0,10,0,0">
+        <Frame BorderColor="Black" 
+                   Margin="10,0,10,0"
+                   HasShadow="true"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand" >
+        <Grid Padding="0,40,0,0">
+        <Grid.RowDefinitions>
+        <RowDefinition  />
+        <RowDefinition  />
+        <RowDefinition  />
+        <RowDefinition  />
+      
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions> 
+
+            <Label Grid.Row="0" Grid.ColumnSpan="3" 
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand" 
+                   Style="{StaticResource labelPrimaryStyle}"
+                   Text="Basic"/>
+
+            <Label Grid.Row="1" 
+                    Grid.ColumnSpan="3"
+                    HorizontalOptions="Center" 
+                   Style="{StaticResource labelSecondaryStyle}"
+                    VerticalOptions="Center" Text="$2.99/m"/>
+
+            <Label Grid.Row="2" Grid.ColumnSpan="3" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   Style="{StaticResource labelSecondaryStyle}"
+                   Text="10 Monitors"/>
+
+            <Label Grid.Row="3" Grid.ColumnSpan="3" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   Style="{StaticResource labelSecondaryStyle}"
+                   Text="24x7 monitoring"/>
+
+                     
+            <Button Grid.Row="4" 
+                    Grid.ColumnSpan="3"
+                    BackgroundColor="#05BDBD"
+                    TextColor="White"
+                    Command="{Binding BasicCommand}"
+                    Text="Choose This Plan" />
+
+    </Grid>
+
+    </Frame>
+
+    </StackLayout>
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 Margin="0,0,0,10">
+            <Frame BorderColor="Black" 
+                   Margin="10,0,10,0"
+                   HasShadow="true"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand" >
+        <Grid Padding="0,40,0,0">
+        <Grid.RowDefinitions>
+        <RowDefinition  />
+        <RowDefinition  />
+        <RowDefinition  />
+        <RowDefinition  />
+        <RowDefinition  />
+      
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions> 
+                                  
+            <Label Grid.Row="0" Grid.ColumnSpan="3" 
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand" 
+                   Style="{StaticResource labelPrimaryStyle}"
+                   Text="Premium"/>
+
+            <Label Grid.Row="1" 
+                    Grid.ColumnSpan="3"
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center" 
+                    Style="{StaticResource labelSecondaryStyle}"
+                    Text="$9.99/m"/>
+
+            <Label Grid.Row="2" Grid.ColumnSpan="3" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   Style="{StaticResource labelSecondaryStyle}"
+                   Text="10 Monitors"/>
+
+            <Label Grid.Row="3" Grid.ColumnSpan="3" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   Style="{StaticResource labelSecondaryStyle}"
+                   Text="24x7 monitoring"/>
+
+            <Button Grid.Row="4" 
+                    Grid.ColumnSpan="3"
+                    BackgroundColor="#05BDBD"
+                    TextColor="White"
+                    Command="{Binding PremiumCommand}"
+                    Text="Choose This Plan" />
+
+            </Grid>
+            </Frame>
+
+            </StackLayout>
+        </StackLayout>
+</ContentPage>

@@ -11,5 +11,9 @@ namespace Monitor
         {
         }
 
-	}
+        public override async Task InitializeAsync(object navigationData)
+        {
+
+        }
+    }
 }

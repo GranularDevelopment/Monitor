@@ -13,6 +13,8 @@ using Monitor.Helpers;
 using Monitor.Localization;
 using Monitor.Enums;
 using System.Net;
+using Monitor.Models;
+using Monitor.Services.Requests;
 
 namespace Monitor
 {
@@ -56,6 +58,7 @@ namespace Monitor
         {
             IsBusy = true;
             await LoginAndGetTokenAsync();
+            //await SaveDeviceId();
             IsBusy = false;
         }
 
@@ -86,6 +89,7 @@ namespace Monitor
 					await NavigationService.NavigateToAsync<MasterDetailViewModel>();
                     await NavigationService.RemoveLastFromBackStackAsync();
                 }
+
             }
             catch (ServiceAuthenticationException e)
             {
@@ -102,7 +106,17 @@ namespace Monitor
                 await DialogService.ShowAlertAsync(AppResources.GenericError, AppResources.Error, AppResources.OK);
             }
         }
-        
+
+        private async Task SaveDeviceId()
+        {
+            MobileDevice device = new MobileDevice
+            {
+                DeviceId = Settings.DeviceGuid.ToString(),
+                UserId = Settings.UserId
+            };
+            await _userService.DeviceAsync(device);
+        }
+
         public ValidatableObject<string> Username 
 		{ 
 			set 

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Monitor
 {
@@ -6,7 +7,9 @@ namespace Monitor
 	{
 		ViewModelBase PreviousPageViewModel { get; }
 
-		Task InitializeAsync();
+        Page PreviousPage{ get; }
+
+        Task InitializeAsync();
 
 		Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;
 

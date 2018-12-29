@@ -75,14 +75,15 @@ namespace Monitor
                 {
                     User user = new User
                     {
-                        UserName = Settings.UserName
+                        UserName = Settings.UserName,
+                        AccountType = getAccountType(productId),
+
                     };
 
                     await _userService.UpgradeAccountAsync(user);
                     //purchased!
                 }
-            }
-            catch (InAppBillingPurchaseException purchaseEx)
+            } catch(InAppBillingPurchaseException purchaseEx)
             {
                 //Billing Exception handle this based on the type
                 Debug.WriteLine("Error: " + purchaseEx);
@@ -98,6 +99,20 @@ namespace Monitor
             }
 
             return true;
+        }
+
+        private int getAccountType(string productId)
+        {
+            if (productId == "10monitor"){
+                return 2;
+            }
+            else if(productId == "50monitor"){
+                return 3;
+            }
+            else{
+                return 1;
+            }
+
         }
 
         private async Task NavigatedCommandAsync(object sender)

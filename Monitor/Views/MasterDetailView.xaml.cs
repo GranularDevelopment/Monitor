@@ -17,10 +17,17 @@ namespace Monitor
 		{
 			base.OnAppearing();
 			await ((DashboardViewModel)Dashboardview.BindingContext).InitializeAsync(null);
-			
-		}
 
-		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+            var view =  this.Detail as  CustomNavigationView; 
+            SettingsViewModel settingsViewModel = view?.CurrentPage?.BindingContext as SettingsViewModel;
+
+            if (settingsViewModel != null){
+                await settingsViewModel.InitializeAsync(null);
+            }
+
+        }
+
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as MasterPageItem;
             if (item != null)

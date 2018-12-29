@@ -15,23 +15,23 @@ namespace Monitor
 		protected override void OnAppearing()
         {
                 
-            if (Settings.UseMocks){
+            //if (Settings.UseMocks){
 
-                listView.ItemsSource = new ObservableCollection<MonitorModel>{
-                new MonitorModel
-                    {
-                    Name = "Very Long Name",
-                        Description = "Description",
-                        StatusCode =  "success.png" ,
-                        Id = 1,
-                        UserId = 2,
-                        URL = "https://upsssssssssssss.com",
-                        EmailAlert = true,
-                        PushAlert = true,
-                        SMSAlert =true ,
-                        }};
+            //    listView.ItemsSource = new ObservableCollection<MonitorModel>{
+            //    new MonitorModel
+            //        {
+            //          Name = "Granular",
+            //            Description = "Description",
+            //            StatusCode =  "success.png" ,
+            //            Id = 1,
+            //            UserId = 2,
+            //            URL = "https://granulardevelopment.com",
+            //            EmailAlert = true,
+            //            PushAlert = true,
+            //            SMSAlert =true ,
+            //            }};
                     
-                }
+            //}
 
             var vm = BindingContext as DashboardViewModel;
 
