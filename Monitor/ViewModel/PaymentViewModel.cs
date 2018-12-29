@@ -29,22 +29,22 @@ namespace Monitor
 
         public async override Task InitializeAsync(object navigationData)
         {
-             var prices = await _billing.GetProductInfoAsync(ItemType.Subscription, "50monitor", "10monitor");
+             var prices = await _billing.GetProductInfoAsync(ItemType.Subscription, "", "");
         }
 
 
         private async Task UpgradeBasicCommandAsync()
         {
-            await PurchaseItem("10monitors");
+            await PurchaseItem("");
 
         }
 
         private async Task UpgradePremiumCommandAsync()
         {
-            await PurchaseItem("50subscription");
+            await PurchaseItem("");
         }
 
-        public async Task<bool> PurchaseItem(string productId, string payload = "123")
+        public async Task<bool> PurchaseItem(string productId, string payload = "")
         {
             if(Settings.UseMocks)
             {
@@ -169,11 +169,11 @@ namespace Monitor
 
         private int getAccountType(string productId)
         {
-            if (productId == "10monitor")
+            if (productId == "")
             {
                 return 2;
             }
-            else if (productId == "50monitor")
+            else if (productId == "")
             {
                 return 3;
             }
