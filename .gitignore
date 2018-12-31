@@ -3,6 +3,7 @@ Debug/
 *Settings.cs
 *GlobalRoutingSettings.cs
 *.vs
+*google-services.json
 # Autosave files
 *~
 

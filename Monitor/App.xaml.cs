@@ -73,12 +73,11 @@ namespace Monitor
             //    };
             //}
 
-            AppCenter.Start("ios=9ee135fc-f20c-44c3-93ec-531f690ee0fe;" +
-                            " android=e24a418f-af46-495c-9427-da9a54e3d0e8", typeof(Push));
+            AppCenter.Start(Settings.iOSAppCenterPush +
+                           Settings.AndroidAppCenterPush, typeof(Push));
             // Handle when your app starts
-            AppCenter.Start("ios=9ee135fc-f20c-44c3-93ec-531f690ee0fe;" 
-                            + "uwp={Your UWP App secret here};" 
-                            +"android=92098ef1-a8a3-4e15-8202-d4b0749eb014;",
+            AppCenter.Start(Settings.iOSAppCenterCrash +
+                            Settings.AndroidAppCenterCrash,
                             typeof(Analytics), typeof(Crashes));
 
             Settings.DeviceGuid = (Guid)await AppCenter.GetInstallIdAsync();

@@ -29,28 +29,39 @@ namespace Monitor
 
         public async override Task InitializeAsync(object navigationData)
         {
-             var prices = await _billing.GetProductInfoAsync(ItemType.Subscription, "", "");
+             var prices = await _billing.GetProductInfoAsync(ItemType.Subscription, Settings.BasiciOS, Settings.PremiumiOS);
         }
-
 
         private async Task UpgradeBasicCommandAsync()
         {
-            await PurchaseItem("");
+            if (Settings.UseMocks)
+            {
+                await FakePurchase(Settings.BasiciOS);
+
+            }
+            else
+            {
+
+                await PurchaseItem(Settings.BasiciOS);
+            }
 
         }
 
         private async Task UpgradePremiumCommandAsync()
         {
-            await PurchaseItem("");
+            if (Settings.UseMocks)
+            {
+                await FakePurchase(Settings.PremiumiOS);
+
+            }
+            else
+            {
+                await PurchaseItem(Settings.PremiumiOS);
+            }
         }
 
         public async Task<bool> PurchaseItem(string productId, string payload = "")
         {
-            if(Settings.UseMocks)
-            {
-
-            }
-
             try
             {
                 var connected = await CrossInAppBilling.Current.ConnectAsync();
@@ -71,17 +82,20 @@ namespace Monitor
                 }
                 else
                 {
-                    User user = new User
-                    {
-                        UserName = Settings.UserName,
-                        AccountType = getAccountType(productId)
-
-                    };
+                   
 
                     var result = purchase.State;
                     var statut = (int)result;
                     var puhase  = purchase.Id;
                     var t = purchase.PurchaseToken;
+                    var date = purchase.TransactionDateUtc;
+
+                    User user = new User
+                    {
+                        UserName = Settings.UserName,
+                        AccountType = getAccountType(productId),
+                        PurchaseToken = purchase.PurchaseToken
+                    };
 
                     await _userService.UpgradeAccountAsync(user);
                     await NavigationService.PopAsync();
@@ -156,24 +170,22 @@ namespace Monitor
             User user = new User
             {
                 UserName = Settings.UserName,
-                AccountType = getAccountType(productId)
-
+                AccountType = getAccountType(productId),
+                PurchaseToken = Guid.NewGuid().ToString()
             };
 
             var result = PurchaseState.Purchased;
-            var purchaseId = "1";
-            var t = "sfsda";
 
             await _userService.UpgradeAccountAsync(user);
         }
 
         private int getAccountType(string productId)
         {
-            if (productId == "")
+            if ( Settings.BasiciOS == productId )
             {
                 return 2;
             }
-            else if (productId == "")
+            else if (Settings.PremiumiOS == productId)
             {
                 return 3;
             }
@@ -183,5 +195,6 @@ namespace Monitor
             }
 
         }
+
     }
 }

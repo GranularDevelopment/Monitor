@@ -25,5 +25,8 @@ namespace Monitor.Model
 
         [JsonProperty(PropertyName = "account_id")]
         public int AccountType { get; set; }
-	}
+
+        [JsonProperty(PropertyName = "purchase_token")]
+        public string PurchaseToken{ get; set; }
+    }
 }

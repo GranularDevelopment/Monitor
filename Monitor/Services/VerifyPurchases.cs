@@ -11,23 +11,31 @@ namespace Monitor.Services
             const string key2 = @"5vkr7Ka4kNFDBNHVodpIO12qQxMv4K87LbSF5Zn1vQI/zJ/Jq2fNvwHzfow39+syBQItqcIyP0MCo3ucwaOz/HHQJUOui7t6pxDowVvCRPN/";
             const string key3 = @"RV5QwRYjYeV4ECbS0+F8U8mOksoiLq792hdzN4V1gmV3zX8gWEmlNNMzLzlxVE2whG3g4NRM0l9vOrJmL7X12xFuUONS8nOTred/bQIDAQAB";
 
-            public Task<bool> VerifyPurchase(string signedData, string signature)
-            {
+//            public Task<bool> VerifyPurchase(string signedData, string signature)
+//            {
 
-#if __ANDROID__
+//#if __ANDROID__
+//            var key1Transform = Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.TransformString(key1, 1);
+//            var key2Transform = Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.TransformString(key2, 2);
+//            var key3Transform = Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.TransformString(key3, 3);
+
+//            return Task.FromResult(Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.VerifyPurchase(key1Transform + key2Transform + key3Transform, signedData, signature));
+//#else
+//                return Task.FromResult(true);
+//#endif
+            //}
+
+        public Task<bool> VerifyPurchase(string signedData, string signature, string productId = null, string transactionId = null)
+        {
+            #if __ANDROID__
             var key1Transform = Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.TransformString(key1, 1);
             var key2Transform = Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.TransformString(key2, 2);
             var key3Transform = Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.TransformString(key3, 3);
 
             return Task.FromResult(Plugin.InAppBilling.InAppBillingImplementation.InAppBillingSecurity.VerifyPurchase(key1Transform + key2Transform + key3Transform, signedData, signature));
-#else
+            #else
                 return Task.FromResult(true);
-#endif
-            }
-
-        public Task<bool> VerifyPurchase(string signedData, string signature, string productId = null, string transactionId = null)
-        {
-            throw new NotImplementedException();
+            #endif
         }
     }
 }
